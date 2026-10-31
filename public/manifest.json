@@ -1,0 +1,16 @@
+{
+  "name": "THE WORLD DAILY — Global News Briefing",
+  "short_name": "World Daily",
+  "description": "India-first daily global newsletter and verified news platform with multi-source corroboration and offline reading support.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#f4f6fb",
+  "theme_color": "#1e3a8a",
+  "icons": [
+    {
+      "src": "/assets/aistudio/Screenshot_2026-10-31_112424_6340be75.png",
+      "sizes": "192x192 512x512",
+      "type": "image/png"
+    }
+  ]
+}
