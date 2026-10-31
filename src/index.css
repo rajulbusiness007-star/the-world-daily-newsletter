@@ -1,0 +1,107 @@
+@import "tailwindcss";
+@custom-variant dark (&:where(.dark, .dark *));
+
+@layer base {
+  :root {
+    --font-headline: 'Cinzel', serif;
+    --font-serif: 'Newsreader', 'Source Serif 4', Georgia, serif;
+    --font-sans: 'Plus Jakarta Sans', sans-serif;
+    --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  html {
+    scroll-behavior: smooth;
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    font-family: var(--font-sans);
+    transition: background-color 250ms var(--ease-out-expo), color 250ms var(--ease-out-expo);
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+
+  .font-masthead {
+    font-family: var(--font-headline);
+    letter-spacing: -0.01em;
+  }
+}
+
+/* Classical broadsheet borders */
+.paper-border-double {
+  border-bottom: 3px double currentColor;
+}
+
+.paper-border-top-double {
+  border-top: 3px double currentColor;
+}
+
+.hairline-b {
+  border-bottom: 1px solid rgba(41, 37, 36, 0.12);
+}
+
+.dark .hairline-b {
+  border-bottom: 1px solid rgba(245, 245, 244, 0.1);
+}
+
+.hairline-t {
+  border-top: 1px solid rgba(41, 37, 36, 0.12);
+}
+
+.dark .hairline-t {
+  border-top: 1px solid rgba(245, 245, 244, 0.1);
+}
+
+.hairline-r {
+  border-right: 1px solid rgba(41, 37, 36, 0.12);
+}
+
+.dark .hairline-r {
+  border-right: 1px solid rgba(245, 245, 244, 0.1);
+}
+
+/* Editorial Dropcap */
+.dropcap::first-letter {
+  font-family: var(--font-headline);
+  float: left;
+  font-size: 3.5rem;
+  line-height: 2.8rem;
+  padding-right: 0.65rem;
+  padding-top: 0.15rem;
+  font-weight: 700;
+  color: #1c1917;
+}
+
+.dark .dropcap::first-letter {
+  color: #f5f5f4;
+}
+
+/* Subtle tactile transitions */
+.editorial-card {
+  transition: transform 220ms var(--ease-out-expo), box-shadow 220ms var(--ease-out-expo), border-color 220ms var(--ease-out-expo);
+}
+
+.editorial-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.04);
+}
+
+.dark .editorial-card:hover {
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4), 0 8px 10px -6px rgba(0, 0, 0, 0.3);
+}
+
+/* Print styling for Daily Newsletter Edition */
+@media print {
+  header, nav, footer, .no-print {
+    display: none !important;
+  }
+  body {
+    background: white !important;
+    color: black !important;
+  }
+}

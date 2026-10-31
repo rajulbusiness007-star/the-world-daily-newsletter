@@ -48,8 +48,8 @@ vercel
 ### Installation & Run
 ```bash
 # 1. Clone repository
-git clone https://github.com/rajulbusiness007-star/the-world-daily-newsletter.git
-cd the-world-daily-newsletter
+git clone https://github.com/rajulbusiness007-star/the-world-daily-news.git
+cd the-world-daily-news
 
 # 2. Install dependencies
 npm install --legacy-peer-deps

@@ -1,0 +1,606 @@
+import { NewsSource } from './types.js';
+
+export const SOURCES_REGISTRY: NewsSource[] = [
+  // --- INDIAN NATIONAL REPORTING ---
+  {
+    id: 'the-hindu',
+    name: 'The Hindu',
+    website: 'https://www.thehindu.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'Kasturi & Sons Ltd (Family-owned trust)',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.thehindu.com/opinion/readers-editor/',
+    rssUrl: 'https://www.thehindu.com/news/national/feeder/default.rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'indian-express',
+    name: 'The Indian Express',
+    website: 'https://indianexpress.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'The Indian Express Group (Viveck Goenka)',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://indianexpress.com/about-us/',
+    rssUrl: 'https://indianexpress.com/section/india/feed/',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'pti',
+    name: 'Press Trust of India (PTI)',
+    website: 'https://www.pti.in',
+    country: 'India',
+    category: 'National',
+    ownership: 'Non-profit cooperative of Indian newspapers',
+    funding: 'Syndication fees from member organisations',
+    sourceType: 'Wire Agency',
+    editorialStandardsUrl: 'https://www.pti.in/aboutus.aspx',
+    rssUrl: 'https://www.thehindu.com/news/national/feeder/default.rss', // PTI syndicates through leading members
+    active: true,
+    isStateControlled: false,
+    requiresLicensingOrApi: true
+  },
+  {
+    id: 'hindustan-times',
+    name: 'Hindustan Times',
+    website: 'https://www.hindustantimes.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'HT Media Ltd (KK Birla Branch)',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.hindustantimes.com/editorial-code-of-conduct',
+    rssUrl: 'https://www.hindustantimes.com/feeds/rss/india-news/rssfeed.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'the-tribune',
+    name: 'The Tribune',
+    website: 'https://www.tribuneindia.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'The Tribune Trust (Founded 1881 by Sardar Dyal Singh Majithia)',
+    funding: 'Non-profit public charitable trust endowment and advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.tribuneindia.com/about-us',
+    rssUrl: 'https://www.tribuneindia.com/rss/feed',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'ndtv',
+    name: 'NDTV',
+    website: 'https://www.ndtv.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'AMG Media Networks (Adani Group)',
+    funding: 'Broadcast carriage, digital subscriptions, advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.ndtv.com/convergence/ndtv/new/editorialcode.aspx',
+    rssUrl: 'https://feeds.feedburner.com/ndtvnews-india-news',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'india-today',
+    name: 'India Today',
+    website: 'https://www.indiatoday.in',
+    country: 'India',
+    category: 'National',
+    ownership: 'Living Media India Ltd (Aroon Purie)',
+    funding: 'Circulation, digital subscriptions, advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.indiatoday.in/corrections-policy',
+    rssUrl: 'https://www.indiatoday.in/rss/1206584',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'scroll-in',
+    name: 'Scroll.in',
+    website: 'https://scroll.in',
+    country: 'India',
+    category: 'National',
+    ownership: 'Scroll Media Inc.',
+    funding: 'Reader memberships, foundation grants and advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://scroll.in/editorial-code',
+    rssUrl: 'https://scroll.in/feed',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'dd-news',
+    name: 'DD News',
+    website: 'https://ddnews.gov.in',
+    country: 'India',
+    category: 'Official',
+    ownership: 'Prasar Bharati (Statutory public autonomous body, Ministry of I&B)',
+    funding: 'Public government grant and broadcasting revenue',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://prasarbharati.gov.in',
+    rssUrl: 'https://ddnews.gov.in/en/feed/',
+    active: true,
+    isStateControlled: false // Autonomous public broadcaster under parliamentary statute
+  },
+
+  // --- INDIAN BUSINESS & FINANCIAL REPORTING ---
+  {
+    id: 'business-standard',
+    name: 'Business Standard',
+    website: 'https://www.business-standard.com',
+    country: 'India',
+    category: 'Financial',
+    ownership: 'Business Standard Private Ltd (Kotak family interests)',
+    funding: 'Print & digital subscriptions, advertising',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://www.business-standard.com/about-us',
+    rssUrl: 'https://www.business-standard.com/rss/home_page_top_stories.rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'livemint',
+    name: 'Mint',
+    website: 'https://www.livemint.com',
+    country: 'India',
+    category: 'Financial',
+    ownership: 'HT Media Ltd (WSJ content partnership historically)',
+    funding: 'Digital subscriptions and advertising',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://www.livemint.com/code-of-ethics',
+    rssUrl: 'https://www.livemint.com/rss/news',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'economic-times',
+    name: 'The Economic Times',
+    website: 'https://economictimes.indiatimes.com',
+    country: 'India',
+    category: 'Financial',
+    ownership: 'Bennett, Coleman & Co. Ltd. (The Times Group)',
+    funding: 'Subscriptions and advertising',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://economictimes.indiatimes.com/terms-conditions',
+    rssUrl: 'https://economictimes.indiatimes.com/rssfeedstopstories.cms',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'moneycontrol',
+    name: 'Moneycontrol',
+    website: 'https://www.moneycontrol.com',
+    country: 'India',
+    category: 'Financial',
+    ownership: 'Network18 Media & Investments (Reliance Industries)',
+    funding: 'Digital subscriptions, financial services, advertising',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://www.moneycontrol.com/terms-conditions',
+    rssUrl: 'https://www.moneycontrol.com/rss/latestnews.xml',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- OFFICIAL PRIMARY INFORMATION ---
+  {
+    id: 'pib',
+    name: 'Press Information Bureau (PIB)',
+    website: 'https://pib.gov.in',
+    country: 'India',
+    category: 'Official',
+    ownership: 'Government of India (Nodal agency of MoI&B)',
+    funding: 'Consolidated Fund of India',
+    sourceType: 'Government Official',
+    editorialStandardsUrl: 'https://pib.gov.in/aboutus.aspx',
+    rssUrl: 'https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1',
+    active: true,
+    isStateControlled: false // Treated strictly as official primary government statement, not independent reporting
+  },
+  {
+    id: 'rbi',
+    name: 'Reserve Bank of India (RBI)',
+    website: 'https://www.rbi.org.in',
+    country: 'India',
+    category: 'Official',
+    ownership: 'Statutory Central Banking Authority of India',
+    funding: 'Central Bank earnings / statutory capital',
+    sourceType: 'Government Official',
+    editorialStandardsUrl: 'https://www.rbi.org.in',
+    rssUrl: 'https://rbi.org.in/pressreleases_rss.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'supreme-court',
+    name: 'Supreme Court of India',
+    website: 'https://main.sci.gov.in',
+    country: 'India',
+    category: 'Official',
+    ownership: 'Apex Judicial Authority of India (Constitution of India)',
+    funding: 'Consolidated Fund of India',
+    sourceType: 'Government Official',
+    editorialStandardsUrl: 'https://main.sci.gov.in',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- FACT-CHECKING ORGANISATIONS ---
+  {
+    id: 'alt-news',
+    name: 'Alt News',
+    website: 'https://www.altnews.in',
+    country: 'India',
+    category: 'Fact-Check',
+    ownership: 'Pravda Media Foundation (Non-profit section 8)',
+    funding: 'Individual public donations / Crowdfunding (IFCN signatory)',
+    sourceType: 'Fact Checker',
+    editorialStandardsUrl: 'https://www.altnews.in/methodology/',
+    rssUrl: 'https://www.altnews.in/feed/',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'boom-live',
+    name: 'BOOM',
+    website: 'https://www.boomlive.in',
+    country: 'India',
+    category: 'Fact-Check',
+    ownership: 'Out刹Media (Govindraj Ethiraj)',
+    funding: 'Commercial partnerships, fact-checking grants (IFCN verified)',
+    sourceType: 'Fact Checker',
+    editorialStandardsUrl: 'https://www.boomlive.in/methodology',
+    rssUrl: 'https://www.boomlive.in/feeds/rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'factly',
+    name: 'Factly',
+    website: 'https://factly.in',
+    country: 'India',
+    category: 'Fact-Check',
+    ownership: 'Factly Media & Research (Rakesh Dubbudu)',
+    funding: 'Grants, consulting, verified public donations (IFCN verified)',
+    sourceType: 'Fact Checker',
+    editorialStandardsUrl: 'https://factly.in/methodology/',
+    rssUrl: 'https://factly.in/feed/',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'pib-factcheck',
+    name: 'PIB Fact Check',
+    website: 'https://factcheck.pib.gov.in',
+    country: 'India',
+    category: 'Fact-Check',
+    ownership: 'Ministry of Information and Broadcasting, Govt of India',
+    funding: 'Government budget',
+    sourceType: 'Government Official',
+    editorialStandardsUrl: 'https://factcheck.pib.gov.in',
+    active: true,
+    isStateControlled: false // NOTE: Clearly presented as government fact-checking source per prompt instructions
+  },
+
+  // --- INTERNATIONAL: UNITED STATES ---
+  {
+    id: 'ap-news',
+    name: 'Associated Press (AP)',
+    website: 'https://apnews.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Independent not-for-profit news cooperative',
+    funding: 'Member subscription fees and licensing',
+    sourceType: 'Wire Agency',
+    editorialStandardsUrl: 'https://www.ap.org/about/news-values-and-principles/',
+    rssUrl: 'https://apnews.com/feed',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'reuters',
+    name: 'Reuters',
+    website: 'https://www.reuters.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Thomson Reuters Corporation',
+    funding: 'Terminal subscriptions, news licensing, enterprise sales',
+    sourceType: 'Wire Agency',
+    editorialStandardsUrl: 'https://www.thomsonreuters.com/en/about-us/trust-principles.html',
+    rssUrl: 'https://www.reutersagency.com/feed/?taxonomy=best-sectors&post_type=best',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'cnn',
+    name: 'CNN International',
+    website: 'https://edition.cnn.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Warner Bros. Discovery (CNN Worldwide)',
+    funding: 'Broadcast carriage subscriptions, commercial advertising, digital syndication',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://edition.cnn.com/standards-and-practices',
+    rssUrl: 'http://rss.cnn.com/rss/edition_world.rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'npr',
+    name: 'NPR',
+    website: 'https://www.npr.org',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Non-profit media organization',
+    funding: 'Member station fees, corporate sponsorship, individual donations',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.npr.org/about-npr/178660742/public-radio-code-of-ethics',
+    rssUrl: 'https://feeds.npr.org/1001/rss.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'pbs-newshour',
+    name: 'PBS NewsHour',
+    website: 'https://www.pbs.org/newshour',
+    country: 'United States',
+    category: 'International',
+    ownership: 'NewsHour Productions (WETA-TV public television)',
+    funding: 'Public broadcasting service grants, viewer contributions, corporate underwriting',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.pbs.org/newshour/about/editorial-standards',
+    rssUrl: 'https://www.pbs.org/newshour/feeds/rss/world',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- INTERNATIONAL: UNITED KINGDOM ---
+  {
+    id: 'bbc-news',
+    name: 'BBC News',
+    website: 'https://www.bbc.com/news',
+    country: 'United Kingdom',
+    category: 'International',
+    ownership: 'British Broadcasting Corporation (Royal Charter)',
+    funding: 'UK Television licence fee and commercial BBC Studios',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.bbc.com/editorialguidelines/',
+    rssUrl: 'http://feeds.bbci.co.uk/news/world/rss.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'the-guardian',
+    name: 'The Guardian',
+    website: 'https://www.theguardian.com',
+    country: 'United Kingdom',
+    category: 'International',
+    ownership: 'The Scott Trust Limited (Autonomous trust safeguarding editorial independence)',
+    funding: 'Reader contributions, digital subscriptions, print circulation',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.theguardian.com/info/2015/aug/05/the-guardians-editorial-code',
+    rssUrl: 'https://www.theguardian.com/world/rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'financial-times',
+    name: 'Financial Times',
+    website: 'https://www.ft.com',
+    country: 'United Kingdom',
+    category: 'Financial',
+    ownership: 'Nikkei, Inc. (Acquired from Pearson in 2015)',
+    funding: 'Digital & print subscriptions, corporate licenses',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://www.ft.com/editorialcode',
+    rssUrl: 'https://www.ft.com/rss/home/global',
+    active: true,
+    isStateControlled: false,
+    requiresLicensingOrApi: true
+  },
+
+  // --- INTERNATIONAL: EUROPE ---
+  {
+    id: 'dw',
+    name: 'Deutsche Welle (DW)',
+    website: 'https://www.dw.com',
+    country: 'Europe',
+    category: 'International',
+    ownership: 'German public state-funded international broadcaster (Deutsche Welle Act)',
+    funding: 'Federal tax revenue through the Federal Government Commissioner for Culture and Media',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.dw.com/en/code-of-conduct/a-45811776',
+    rssUrl: 'https://rss.dw.com/rdf/rss-en-all',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'france-24',
+    name: 'France 24',
+    website: 'https://www.france24.com',
+    country: 'Europe',
+    category: 'International',
+    ownership: 'France Médias Monde (French state-owned holding)',
+    funding: 'French public broadcasting contribution',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.france24.com/en/charter',
+    rssUrl: 'https://www.france24.com/en/rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'euronews',
+    name: 'Euronews',
+    website: 'https://www.euronews.com',
+    country: 'Europe',
+    category: 'International',
+    ownership: 'Alpac Capital (Portuguese investment fund)',
+    funding: 'Commercial revenue, European Commission broadcasting grants',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.euronews.com/editorial-standards',
+    rssUrl: 'https://www.euronews.com/rss',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- INTERNATIONAL: AUSTRALIA ---
+  {
+    id: 'abc-australia',
+    name: 'ABC News Australia',
+    website: 'https://www.abc.net.au',
+    country: 'Australia',
+    category: 'International',
+    ownership: 'Australian Broadcasting Corporation (Statutory public corporation)',
+    funding: 'Australian Commonwealth Government annual appropriation',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://about.abc.net.au/how-the-abc-is-run/editorial-standards/',
+    rssUrl: 'https://www.abc.net.au/news/feed/45910/rss.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'sbs-australia',
+    name: 'SBS News',
+    website: 'https://www.sbs.com.au',
+    country: 'Australia',
+    category: 'International',
+    ownership: 'Special Broadcasting Service (Australian statutory authority)',
+    funding: 'Government appropriation and commercial advertising',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.sbs.com.au/aboutus/editorial-guidelines',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- INTERNATIONAL: CHINA & ASIA-PACIFIC ---
+  {
+    id: 'scmp',
+    name: 'South China Morning Post (SCMP)',
+    website: 'https://www.scmp.com',
+    country: 'China',
+    category: 'International',
+    ownership: 'Alibaba Group (Hong Kong based)',
+    funding: 'Digital subscriptions, advertising, events',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.scmp.com/editorial-standards',
+    rssUrl: 'https://www.scmp.com/rss/91/feed',
+    active: true,
+    isStateControlled: false // Hong Kong commercial publication with independent editorial board
+  },
+  {
+    id: 'nikkei-asia',
+    name: 'Nikkei Asia',
+    website: 'https://asia.nikkei.com',
+    country: 'Japan',
+    category: 'Financial',
+    ownership: 'Nikkei, Inc. (Tokyo, Japan)',
+    funding: 'Subscriptions and advertising',
+    sourceType: 'Independent Financial',
+    editorialStandardsUrl: 'https://asia.nikkei.com/info/editorial-policy',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'nhk-world',
+    name: 'NHK World-Japan',
+    website: 'https://www3.nhk.or.jp/nhkworld/',
+    country: 'Japan',
+    category: 'International',
+    ownership: 'Nippon Hoso Kyokai (Japan Broadcasting Corporation, statutory charter)',
+    funding: 'Receiving fees collected under the Broadcast Act of Japan',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.nhk.or.jp/pr/english/corporate/standards.html',
+    rssUrl: 'https://www3.nhk.or.jp/nhkworld/en/news/rss/index.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'al-jazeera',
+    name: 'Al Jazeera English',
+    website: 'https://www.aljazeera.com',
+    country: 'Global',
+    category: 'International',
+    ownership: 'Al Jazeera Media Network (Funded by the State of Qatar)',
+    funding: 'Public grant from the Government of Qatar and commercial advertising',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://network.aljazeera.net/en/about-us/code-ethics',
+    rssUrl: 'https://www.aljazeera.com/xml/rss/all.xml',
+    active: true,
+    isStateControlled: false
+  },
+
+  // --- STATE-CONTROLLED LABELED OUTLETS (EXPLICIT DISCLOSURE MANDATE) ---
+  {
+    id: 'xinhua',
+    name: 'Xinhua News Agency',
+    website: 'http://www.xinhuanet.com/english/',
+    country: 'China',
+    category: 'Official',
+    ownership: 'State Council of the People\'s Republic of China',
+    funding: 'State Budget of the PRC',
+    sourceType: 'State-Controlled Media',
+    editorialStandardsUrl: 'http://www.xinhuanet.com/english/about.htm',
+    active: true,
+    isStateControlled: true // Explicitly flagged per section 3 instructions
+  },
+  {
+    id: 'cgtn',
+    name: 'CGTN',
+    website: 'https://www.cgtn.com',
+    country: 'China',
+    category: 'Official',
+    ownership: 'China Media Group (under the Central Propaganda Department of the CCP)',
+    funding: 'Direct state allocation',
+    sourceType: 'State-Controlled Media',
+    editorialStandardsUrl: 'https://www.cgtn.com',
+    active: true,
+    isStateControlled: true
+  },
+  {
+    id: 'china-daily',
+    name: 'China Daily',
+    website: 'https://www.chinadaily.com.cn',
+    country: 'China',
+    category: 'Official',
+    ownership: 'Publicity Department of the Chinese Communist Party',
+    funding: 'Direct state allocation and advertising',
+    sourceType: 'State-Controlled Media',
+    editorialStandardsUrl: 'https://www.chinadaily.com.cn',
+    active: true,
+    isStateControlled: true
+  }
+];
+
+export function getSourceById(id: string): NewsSource | undefined {
+  return SOURCES_REGISTRY.find(s => s.id === id);
+}
+
+export function getActiveRssFeeds(): NewsSource[] {
+  return SOURCES_REGISTRY.filter(s => s.active && s.rssUrl && !s.requiresLicensingOrApi);
+}
+
+export const TRUSTED_CORE_OUTLET_IDS = [
+  'indian-express',
+  'bbc-news',
+  'cnn',
+  'al-jazeera',
+  'the-hindu',
+  'reuters',
+  'ap-news',
+  'the-guardian',
+  'financial-times',
+  'dw',
+  'france-24',
+  'ndtv'
+];
+
+export function getTrustedCoreOutlets(): NewsSource[] {
+  return SOURCES_REGISTRY.filter(s => TRUSTED_CORE_OUTLET_IDS.includes(s.id));
+}
+
