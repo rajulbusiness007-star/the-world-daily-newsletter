@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { DailyEdition, Article } from '../types.js';
 import { ArticleCard } from './ArticleCard.js';
-import { Printer, Copy, Check, Sparkles, BookOpen, Layers, ExternalLink, Calendar, MapPin, ShieldCheck, Clock, ArrowUpRight, WifiOff, CheckCircle2, Download, Headphones, Volume2, Play, Pause, Radio, SlidersHorizontal, Filter, Bell, BellRing } from 'lucide-react';
+import { Printer, Copy, Check, Sparkles, BookOpen, Layers, ExternalLink, Calendar, MapPin, ShieldCheck, Clock, ArrowUpRight, WifiOff, CheckCircle2, Download, Headphones, Volume2, Play, Pause, Radio, SlidersHorizontal, Filter, Bell, BellRing, Camera } from 'lucide-react';
 import { getReadingTime, getArticleReadingTime } from '../utils/readingTime.js';
-import { getArticleImageUrl, DEFAULT_FALLBACK_IMAGE } from '../utils/newsImages.js';
+import { getArticleImageUrl, DEFAULT_FALLBACK_IMAGE, isVerifiedArticleImage } from '../utils/newsImages.js';
 import { 
   ConnectedOutletsBar, 
   ConnectedOutletsModal, 
@@ -143,11 +143,11 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
   const displaySectionA = filterByOutlet(edition.sectionA_IndiaTop10);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 space-y-14 pb-20">
+    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 space-y-14 pb-20 overflow-hidden">
       {/* Top Edition Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-900 dark:border-stone-100 pb-5">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
+      <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-900 dark:border-stone-100 pb-5 min-w-0">
+        <div className="space-y-1 min-w-0">
+          <div className="flex items-center gap-2 flex-wrap">
             <span className="text-[11px] font-bold uppercase tracking-[0.2em] text-stone-600 dark:text-stone-400 font-sans">
               Automated Daily Briefing · Asia/Kolkata 06:30 AM IST
             </span>
@@ -157,10 +157,10 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
               </span>
             )}
           </div>
-          <h2 className="font-editorial text-3xl sm:text-4xl font-black text-stone-950 dark:text-stone-50">
+          <h2 className="font-editorial text-3xl sm:text-4xl font-black text-stone-950 dark:text-stone-50 break-words">
             Daily Newsletter — {edition.formattedDate}
           </h2>
-          <div className="text-xs text-stone-500 font-sans flex items-center gap-2 flex-wrap">
+          <div className="text-xs text-stone-500 font-sans flex items-center gap-2 flex-wrap min-w-0">
             <span>Edition #{edition.editionNumber}</span>
             <span aria-hidden="true">·</span>
             <span>{edition.totalArticles} Verified Stories</span>
@@ -175,7 +175,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
           </div>
         </div>
 
-        <div className="flex items-center gap-2 no-print font-sans flex-wrap">
+        <div className="flex items-center gap-2 no-print font-sans flex-wrap shrink-0">
           {onOpenNotifications && (
             <button
               onClick={onOpenNotifications}
@@ -241,13 +241,13 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
 
       {/* HERO AUDIO BRIEFING BANNER */}
       {onPlayEdition && (
-        <div className="rounded-2xl p-5 sm:p-6 bg-gradient-to-br from-stone-900 via-stone-850 to-stone-900 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950 text-stone-100 shadow-xl border border-stone-750 dark:border-stone-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 no-print">
-          <div className="flex items-start gap-4">
+        <div className="rounded-2xl p-5 sm:p-6 bg-gradient-to-br from-stone-900 via-stone-850 to-stone-900 dark:from-stone-950 dark:via-stone-900 dark:to-stone-950 text-stone-100 shadow-xl border border-stone-750 dark:border-stone-800 flex flex-col md:flex-row items-start md:items-center justify-between gap-5 no-print min-w-0">
+          <div className="flex items-start gap-4 min-w-0 flex-1">
             <div className="w-12 h-12 rounded-xl bg-amber-500/20 text-amber-400 border border-amber-500/30 flex items-center justify-center shrink-0 mt-0.5">
               <Headphones className="w-6 h-6" />
             </div>
-            <div className="space-y-1">
-              <div className="flex items-center gap-2">
+            <div className="space-y-1 min-w-0 flex-1">
+              <div className="flex items-center gap-2 flex-wrap">
                 <span className="text-[10px] uppercase font-bold tracking-widest text-amber-400">
                   Audio Briefing Edition
                 </span>
@@ -256,10 +256,10 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
                   ~12 min narration · Hands-Free
                 </span>
               </div>
-              <h3 className="font-editorial text-xl sm:text-2xl font-black text-white">
+              <h3 className="font-editorial text-xl sm:text-2xl font-black text-white break-words">
                 Listen to Today's Morning Edition
               </h3>
-              <p className="text-xs text-stone-300 font-sans max-w-xl leading-relaxed">
+              <p className="text-xs text-stone-300 font-sans max-w-xl leading-relaxed break-words">
                 Automated audio narration powered by Web Speech Synthesis. Reads Five Things to Remember, The Bigger Picture explainer, and top verified dispatches in sequence.
               </p>
             </div>
@@ -292,16 +292,16 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
         </div>
       )}
 
-      {/* SECTION H: FIVE THINGS TO REMEMBER TODAY (Prominently Placed at Top) */}
-      <section className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-6 sm:p-7 rounded-sm shadow-2xs space-y-4">
-        <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2.5">
-          <div className="flex items-center gap-2">
-            <Sparkles className="w-4 h-4 text-stone-600 dark:text-stone-400" />
-            <h3 className="font-editorial text-lg sm:text-xl font-bold text-stone-950 dark:text-stone-100 uppercase tracking-tight">
+      {/* SECTION H: FIVE THINGS TO REMEMBER TODAY */}
+      <section className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-6 sm:p-7 rounded-sm shadow-2xs space-y-4 min-w-0 overflow-hidden">
+        <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2.5 flex-wrap gap-2">
+          <div className="flex items-center gap-2 min-w-0">
+            <Sparkles className="w-4 h-4 text-stone-600 dark:text-stone-400 shrink-0" />
+            <h3 className="font-editorial text-lg sm:text-xl font-bold text-stone-950 dark:text-stone-100 uppercase tracking-tight break-words">
               Section H · Five Things to Remember Today
             </h3>
           </div>
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {onPlaySection && (
               <button
                 onClick={() => {
@@ -328,16 +328,16 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
           </div>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-5 gap-3.5 pt-1">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-3.5 pt-1">
           {edition.sectionH_FiveThingsToRemember.map((takeaway, idx) => (
             <div 
               key={idx}
-              className="p-3.5 rounded-xs bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200/90 dark:border-stone-800 space-y-1.5"
+              className="p-3.5 rounded-xs bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200/90 dark:border-stone-800 space-y-1.5 min-w-0"
             >
               <div className="font-editorial font-bold text-sm text-stone-900 dark:text-stone-100">
                 0{idx + 1}.
               </div>
-              <p className="text-xs text-stone-700 dark:text-stone-300 font-sans leading-relaxed">
+              <p className="text-xs text-stone-700 dark:text-stone-300 font-sans leading-relaxed break-words">
                 {takeaway}
               </p>
             </div>
@@ -345,186 +345,147 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
         </div>
       </section>
 
-      {/* SECTION G: THE BIGGER PICTURE (Daily Editorial Explainer) */}
-      <section className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-6 sm:p-8 rounded-sm space-y-6 shadow-2xs">
-        <div className="border-b border-stone-200 dark:border-stone-800 pb-3 flex items-center justify-between">
+      {/* SECTION G: THE BIGGER PICTURE */}
+      <section className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-6 sm:p-8 rounded-sm space-y-6 shadow-2xs overflow-hidden min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
           <div className="flex items-center gap-2">
-            <BookOpen className="w-4 h-4 text-stone-700 dark:text-stone-300" />
-            <h3 className="font-editorial text-xl font-black text-stone-950 dark:text-stone-100 uppercase tracking-tight">
-              Section G · The Bigger Picture — Daily Editorial Explainer
+            <BookOpen className="w-4 h-4 text-stone-700 dark:text-stone-300 shrink-0" />
+            <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
+              Section G · The Bigger Picture
             </h3>
           </div>
-          <div className="flex items-center gap-2">
-            {onPlaySection && (
-              <button
-                onClick={() => {
-                  const bp = edition.sectionG_TheBiggerPicture;
-                  const confirmedText = bp.whatIsConfirmed.join('. ');
-                  const text = `The Bigger Picture: ${bp.headline}. What happened: ${bp.whatHappened}. Why it happened: ${bp.whyDidItHappen}. What is confirmed: ${confirmedText}. Why should Indian readers care: ${bp.whyIndianReadersCare}. What could happen next: ${bp.whatCouldHappenNext}.`;
-                  onPlaySection(
-                    bp.headline,
-                    'Section G · Daily Editorial Explainer',
-                    text,
-                    'section-g'
-                  );
-                }}
-                className="px-2.5 py-1 rounded text-xs font-semibold flex items-center gap-1.5 bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-800 dark:text-stone-200 transition-colors cursor-pointer"
-                title="Listen to Explainer (approx. 3 minutes)"
-              >
-                <Headphones className="w-3.5 h-3.5 text-stone-600 dark:text-stone-400" />
-                <span>Listen (3 min)</span>
-              </button>
-            )}
-            <span className="text-[11px] uppercase tracking-widest text-stone-500 font-semibold font-sans hidden sm:inline">
-              Synthesis Desk
-            </span>
-          </div>
+          <span className="text-xs text-stone-500 uppercase font-sans font-semibold shrink-0">
+            Daily In-Depth Explainer
+          </span>
         </div>
 
-        <div className="space-y-5">
-          <h4 className="font-editorial text-2xl sm:text-3xl font-extrabold text-stone-950 dark:text-stone-50 leading-snug">
+        <div className="space-y-4 min-w-0">
+          <h4 className="font-editorial text-2xl sm:text-3xl font-black text-stone-950 dark:text-stone-50 leading-tight break-words">
             {edition.sectionG_TheBiggerPicture.headline}
           </h4>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm font-sans">
-            <div className="space-y-1.5">
-              <h5 className="font-bold text-xs uppercase tracking-widest text-stone-900 dark:text-stone-100">
-                What Happened?
-              </h5>
-              <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
+          <div className="prose dark:prose-invert max-w-none text-stone-800 dark:text-stone-200 font-sans text-sm sm:text-base leading-relaxed space-y-4">
+            <div className="p-4 rounded bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200 dark:border-stone-800 min-w-0">
+              <strong className="block text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100 mb-1">
+                What Happened:
+              </strong>
+              <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed break-words">
                 {edition.sectionG_TheBiggerPicture.whatHappened}
               </p>
             </div>
 
-            <div className="space-y-1.5">
-              <h5 className="font-bold text-xs uppercase tracking-widest text-stone-900 dark:text-stone-100">
-                Why Did It Happen?
-              </h5>
-              <p className="text-stone-700 dark:text-stone-300 leading-relaxed">
+            <div className="p-4 rounded bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200 dark:border-stone-800 min-w-0">
+              <strong className="block text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100 mb-1">
+                Why Did It Happen:
+              </strong>
+              <p className="text-sm text-stone-700 dark:text-stone-300 leading-relaxed break-words">
                 {edition.sectionG_TheBiggerPicture.whyDidItHappen}
               </p>
             </div>
-          </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6 pt-3 border-t border-stone-200 dark:border-stone-800 text-xs sm:text-sm font-sans">
-            <div className="space-y-2">
-              <h5 className="font-bold uppercase tracking-widest text-stone-900 dark:text-stone-100 text-xs">
-                What Is Confirmed:
-              </h5>
-              <ul className="space-y-1.5 list-disc list-inside text-stone-700 dark:text-stone-300">
-                {edition.sectionG_TheBiggerPicture.whatIsConfirmed.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="p-4 rounded bg-emerald-50/60 dark:bg-emerald-950/30 border border-emerald-200 dark:border-emerald-800/60 min-w-0">
+                <strong className="block text-xs font-bold uppercase tracking-wider text-emerald-900 dark:text-emerald-300 mb-2">
+                  ✓ What Is Confirmed:
+                </strong>
+                <ul className="text-xs text-emerald-950 dark:text-emerald-200 space-y-1.5 list-disc list-inside">
+                  {edition.sectionG_TheBiggerPicture.whatIsConfirmed.map((c, i) => (
+                    <li key={i} className="break-words">{c}</li>
+                  ))}
+                </ul>
+              </div>
+
+              <div className="p-4 rounded bg-amber-50/60 dark:bg-amber-950/30 border border-amber-200 dark:border-amber-800/60 min-w-0">
+                <strong className="block text-xs font-bold uppercase tracking-wider text-amber-900 dark:text-amber-300 mb-2">
+                  ⚠ What Is Still Uncertain:
+                </strong>
+                <ul className="text-xs text-amber-950 dark:text-amber-200 space-y-1.5 list-disc list-inside">
+                  {edition.sectionG_TheBiggerPicture.whatIsStillUncertain.map((u, i) => (
+                    <li key={i} className="break-words">{u}</li>
+                  ))}
+                </ul>
+              </div>
             </div>
 
-            <div className="space-y-2">
-              <h5 className="font-bold uppercase tracking-widest text-stone-900 dark:text-stone-100 text-xs">
-                What Is Still Uncertain:
-              </h5>
-              <ul className="space-y-1.5 list-disc list-inside text-stone-700 dark:text-stone-300">
-                {edition.sectionG_TheBiggerPicture.whatIsStillUncertain.map((item, i) => (
-                  <li key={i}>{item}</li>
-                ))}
-              </ul>
-            </div>
-          </div>
-
-          <div className="p-4 rounded-xs bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200 dark:border-stone-800 text-xs sm:text-sm font-sans space-y-2">
-            <div>
-              <strong className="text-stone-950 dark:text-stone-100 uppercase tracking-wider mr-1">What could happen next?</strong>
-              <span className="text-stone-700 dark:text-stone-300">{edition.sectionG_TheBiggerPicture.whatCouldHappenNext}</span>
-            </div>
-            <div>
-              <strong className="text-stone-950 dark:text-stone-100 uppercase tracking-wider mr-1">Why should Indian readers care?</strong>
-              <span className="text-stone-700 dark:text-stone-300">{edition.sectionG_TheBiggerPicture.whyIndianReadersCare}</span>
+            <div className="p-4 rounded bg-blue-50/60 dark:bg-blue-950/30 border border-blue-200 dark:border-blue-800/60 text-xs text-blue-950 dark:text-blue-200 min-w-0">
+              <strong className="block font-bold uppercase tracking-wider text-blue-900 dark:text-blue-300 mb-1">
+                Why Readers Care:
+              </strong>
+              <p className="break-words">{edition.sectionG_TheBiggerPicture.whyIndianReadersCare}</p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* SECTION A: INDIA — TODAY'S TOP 10 NEWS */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
-            Section A · India — Today's Top 10 News
+      {/* SECTION A: INDIA — TOP 10 DEVELOPMENTS */}
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
+            Section A · India — Top 10 Developments
           </h3>
-          <span className="text-xs font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 font-sans">
-            Primary Priority
-          </span>
+          <span className="text-xs text-stone-500 font-semibold uppercase font-sans shrink-0">National Record</span>
         </div>
 
-        <div className="space-y-4">
+        <div className="space-y-6 min-w-0">
           {displaySectionA.map((article, idx) => {
             const isSpeakingThis = currentArticleId === article.id && isPlaying;
+            const hasVerifiedPhoto = isVerifiedArticleImage(article);
+
             return (
-              <div
+              <div 
                 key={`secA-${article.id}-${idx}`}
                 onClick={() => onOpenDetail(article)}
-                className={`editorial-card p-5 sm:p-6 bg-white dark:bg-stone-900 border rounded-sm cursor-pointer transition-all shadow-2xs space-y-3 ${
-                  isSpeakingThis 
-                    ? 'border-amber-500 ring-2 ring-amber-500/30 dark:ring-amber-500/20' 
-                    : 'border-stone-200 dark:border-stone-800 hover:border-stone-400'
-                }`}
+                className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 p-5 sm:p-6 rounded-sm space-y-3.5 hover:border-stone-500 transition-all cursor-pointer shadow-2xs overflow-hidden min-w-0"
               >
-                <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-sans">
-                  <div className="flex items-center gap-2">
-                    <span className="w-5 h-5 rounded-sm bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 flex items-center justify-center font-bold text-[11px]">
-                      {idx + 1}
+                <div className="flex items-center justify-between border-b border-stone-200 dark:border-stone-800 pb-2.5 flex-wrap gap-2 text-xs font-sans text-stone-500">
+                  <div className="flex items-center gap-2 min-w-0 flex-wrap">
+                    <span className="font-editorial font-bold text-base text-stone-900 dark:text-stone-100">
+                      #{idx + 1}
                     </span>
-                    <span className="font-bold text-stone-900 dark:text-stone-100 uppercase tracking-wide">
+                    <span aria-hidden="true" className="text-stone-300">·</span>
+                    <span className="font-semibold text-stone-900 dark:text-stone-100 truncate">
                       {article.publisher}
                     </span>
                     <span aria-hidden="true" className="text-stone-300">·</span>
-                    <span className="text-stone-500 uppercase flex items-center gap-1">
-                      <MapPin className="w-3 h-3 text-stone-400" />
-                      {article.location || 'New Delhi, India'}
-                    </span>
-                    {isSpeakingThis && (
-                      <span className="inline-flex items-center gap-1 px-2 py-0.5 rounded text-[10px] font-bold bg-amber-100 text-amber-900 dark:bg-amber-950 dark:text-amber-300 border border-amber-300 dark:border-amber-700 animate-pulse">
-                        <Volume2 className="w-3 h-3" /> Now Playing
-                      </span>
-                    )}
+                    <span className="text-stone-500 truncate">{article.location || 'New Delhi'}</span>
                   </div>
 
-                  <div className="flex items-center gap-2">
-                    <span className="flex items-center gap-1 text-[11px] text-stone-500 font-medium">
-                      <Clock className="w-3 h-3 text-stone-500" />
-                      {getArticleReadingTime(article)}
-                    </span>
-                    <span aria-hidden="true" className="text-stone-300">·</span>
-                    <span className="text-[11px] text-stone-400">
-                      {new Date(article.publishedAt).toLocaleTimeString('en-IN', { timeZone: 'Asia/Kolkata', hour: '2-digit', minute: '2-digit', hour12: true })} IST
-                    </span>
-                    <span aria-hidden="true" className="text-stone-300">·</span>
+                  <div className="flex items-center gap-2 shrink-0">
+                    {hasVerifiedPhoto && (
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold text-emerald-700 dark:text-emerald-400 bg-emerald-50 dark:bg-emerald-950/40 px-2 py-0.5 rounded border border-emerald-200 dark:border-emerald-800">
+                        <Camera className="w-3 h-3 text-emerald-500" /> Photo
+                      </span>
+                    )}
                     <span className="font-semibold text-xs text-stone-700 dark:text-stone-300">
                       [{article.verificationStatus}]
                     </span>
                   </div>
                 </div>
 
-                <div className="flex flex-col sm:flex-row gap-4 items-start">
-                  <img
-                    src={getArticleImageUrl(article)}
-                    alt={article.headline}
-                    className="w-full sm:w-40 sm:h-28 rounded-xl object-cover shrink-0 bg-slate-100 dark:bg-slate-800"
-                    onError={(e) => {
-                      (e.currentTarget as HTMLImageElement).src = DEFAULT_FALLBACK_IMAGE;
-                    }}
-                  />
+                <div className="flex flex-col sm:flex-row gap-4 items-start min-w-0">
+                  <div className="relative w-full sm:w-44 sm:h-28 rounded-xl overflow-hidden shrink-0 bg-slate-100 dark:bg-slate-800">
+                    <img
+                      src={getArticleImageUrl(article)}
+                      alt={article.headline}
+                      className="w-full h-full object-cover"
+                      onError={(e) => {
+                        (e.currentTarget as HTMLImageElement).src = DEFAULT_FALLBACK_IMAGE;
+                      }}
+                    />
+                  </div>
                   <div className="space-y-2 flex-1 min-w-0">
-                    <h4 className={`font-editorial text-stone-950 dark:text-stone-50 leading-snug ${sectionAHeadlineClass}`}>
+                    <h4 className={`font-editorial text-stone-950 dark:text-stone-50 leading-snug break-words ${sectionAHeadlineClass}`}>
                       {article.headline}
                     </h4>
 
-                    <p className={`text-stone-600 dark:text-stone-300 font-sans ${sectionASummaryClass}`}>
+                    <p className={`text-stone-600 dark:text-stone-300 font-sans break-words ${sectionASummaryClass}`}>
                       {article.summary}
                     </p>
                   </div>
                 </div>
 
                 {article.whyItMatters && (
-                  <div className="p-3 rounded-xs bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200 dark:border-stone-800 text-xs text-stone-700 dark:text-stone-300 font-sans leading-relaxed">
+                  <div className="p-3 rounded-xs bg-[#fbf9f5] dark:bg-stone-950/80 border border-stone-200 dark:border-stone-800 text-xs text-stone-700 dark:text-stone-300 font-sans leading-relaxed break-words">
                     <strong className="text-stone-950 dark:text-stone-100 uppercase tracking-wider block mb-0.5">
                       Why this news matters:
                     </strong>
@@ -532,12 +493,12 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
                   </div>
                 )}
 
-                <div className="flex items-center justify-between pt-2 border-t border-stone-100 dark:border-stone-800/80 text-xs text-stone-500 font-sans" onClick={(e) => e.stopPropagation()}>
-                  <span className="text-[11px]">
+                <div className="flex items-center justify-between pt-2 border-t border-stone-100 dark:border-stone-800/80 text-xs text-stone-500 font-sans flex-wrap gap-2" onClick={(e) => e.stopPropagation()}>
+                  <span className="text-[11px] truncate">
                     {article.corroboratingSources?.length ? `Corroborated by ${article.corroboratingSources.length} organisations` : 'Primary wire source'}
                   </span>
                   
-                  <div className="flex items-center gap-3">
+                  <div className="flex items-center gap-3 shrink-0">
                     {onPlayArticle && (
                       <button
                         onClick={() => onPlayArticle(article)}
@@ -558,7 +519,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
                       rel="noopener noreferrer"
                       className="font-bold text-stone-900 dark:text-stone-100 hover:underline inline-flex items-center gap-1"
                     >
-                      Read Original on {article.publisher} <ArrowUpRight className="w-3 h-3" />
+                      Read on {article.publisher} <ArrowUpRight className="w-3 h-3" />
                     </a>
                   </div>
                 </div>
@@ -588,12 +549,12 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
       />
 
       {/* SECTION B: INDIA — DETAILED COVERAGE */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
             Section B · India — Detailed Coverage by Category
           </h3>
-          <span className="text-xs text-stone-500 font-semibold uppercase font-sans">8 Core Domains</span>
+          <span className="text-xs text-stone-500 font-semibold uppercase font-sans shrink-0">8 Core Domains</span>
         </div>
 
         {/* Category Segmented Tabs */}
@@ -602,7 +563,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
             <button
               key={cat.key}
               onClick={() => setActiveCategoryTab(cat.key)}
-              className={`px-3 py-1.5 rounded-sm transition-all whitespace-nowrap ${
+              className={`px-3 py-1.5 rounded-sm transition-all whitespace-nowrap shrink-0 cursor-pointer ${
                 activeCategoryTab === cat.key
                   ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-2xs'
                   : 'bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 hover:bg-stone-200'
@@ -613,7 +574,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
           ))}
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
           {activeCategoryArticles.map((article: Article, idx: number) => (
             <ArticleCard
               key={`secB-${article.id}-${idx}`}
@@ -626,7 +587,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
           ))}
 
           {activeCategoryArticles.length === 0 && (
-            <div className="col-span-2 p-8 text-center bg-stone-100 dark:bg-stone-900 rounded-sm text-stone-500 text-sm font-sans">
+            <div className="col-span-1 md:col-span-2 p-8 text-center bg-stone-100 dark:bg-stone-900 rounded-sm text-stone-500 text-sm font-sans">
               No articles currently filed under this specific subcategory for today's edition.
             </div>
           )}
@@ -634,19 +595,21 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
       </section>
 
       {/* SECTION C: WORLD — TOP INTERNATIONAL NEWS */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
             Section C · World — Top International News
           </h3>
-          <span className="text-xs text-stone-500 font-semibold uppercase font-sans">US · UK · Europe · China · Australia</span>
+          <span className="text-xs text-stone-500 font-semibold uppercase font-sans shrink-0">
+            US (CNN, NYT, WaPo) · UK (BBC, Sky News) · Europe · China · Australia · Asia-Pacific
+          </span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 min-w-0">
           {/* US & UK */}
-          <div className="space-y-4">
-            <h4 className="font-editorial text-base font-bold text-stone-800 dark:text-stone-200 border-b border-stone-200 dark:border-stone-800 pb-1.5">
-              United States & United Kingdom
+          <div className="space-y-4 min-w-0">
+            <h4 className="font-editorial text-base font-bold text-stone-800 dark:text-stone-200 border-b border-stone-200 dark:border-stone-800 pb-1.5 break-words">
+              United States & United Kingdom (CNN, NYT, BBC, Sky News, Reuters)
             </h4>
             {filterByOutlet([...edition.sectionC_WorldTop.unitedStates, ...edition.sectionC_WorldTop.unitedKingdom]).slice(0, 4).map((art, idx) => (
               <ArticleCard
@@ -660,10 +623,10 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
             ))}
           </div>
 
-          {/* Europe, Asia-Pacific, Middle East */}
-          <div className="space-y-4">
-            <h4 className="font-editorial text-base font-bold text-stone-800 dark:text-stone-200 border-b border-stone-200 dark:border-stone-800 pb-1.5">
-              Europe, Middle East & Asia-Pacific
+          {/* Europe, Asia-Pacific, Middle East, China */}
+          <div className="space-y-4 min-w-0">
+            <h4 className="font-editorial text-base font-bold text-stone-800 dark:text-stone-200 border-b border-stone-200 dark:border-stone-800 pb-1.5 break-words">
+              Europe, China, Middle East & Asia-Pacific (SCMP, CNA, DW, Al Jazeera)
             </h4>
             {filterByOutlet([...edition.sectionC_WorldTop.europe, ...edition.sectionC_WorldTop.middleEast, ...edition.sectionC_WorldTop.china, ...edition.sectionC_WorldTop.australia]).slice(0, 4).map((art, idx) => (
               <ArticleCard
@@ -680,15 +643,15 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
       </section>
 
       {/* SECTION D: WORLD ECONOMY AND BUSINESS */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
             Section D · World Economy and Business
           </h3>
-          <span className="text-xs text-stone-500 uppercase font-sans">Global Macro & Central Banks</span>
+          <span className="text-xs text-stone-500 uppercase font-sans shrink-0">Global Macro & Central Banks</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
           {filterByOutlet(edition.sectionD_WorldEconomy).slice(0, 4).map((art, idx) => (
             <ArticleCard
               key={`secD-${art.id}-${idx}`}
@@ -703,15 +666,15 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
       </section>
 
       {/* SECTION E: TECHNOLOGY AND AI */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
             Section E · Technology and AI
           </h3>
-          <span className="text-xs text-stone-500 uppercase font-sans">Frontier Models, Hardware & Policy</span>
+          <span className="text-xs text-stone-500 uppercase font-sans shrink-0">Frontier Models, Hardware & Policy</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
           {filterByOutlet(edition.sectionE_TechAndAI).slice(0, 4).map((art, idx) => (
             <ArticleCard
               key={`secE-${art.id}-${idx}`}
@@ -726,15 +689,15 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
       </section>
 
       {/* SECTION F: SCIENCE, CLIMATE AND ENVIRONMENT */}
-      <section className="space-y-6">
-        <div className="paper-border-double pb-2.5 flex items-center justify-between">
-          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+      <section className="space-y-6 min-w-0">
+        <div className="paper-border-double pb-2.5 flex items-center justify-between flex-wrap gap-2">
+          <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
             Section F · Science, Climate and Environment
           </h3>
-          <span className="text-xs text-stone-500 uppercase font-sans">Space, Energy & Peer-Reviewed Science</span>
+          <span className="text-xs text-stone-500 uppercase font-sans shrink-0">Space, Energy & Peer-Reviewed Science</span>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 min-w-0">
           {filterByOutlet(edition.sectionF_ScienceAndClimate).slice(0, 4).map((art, idx) => (
             <ArticleCard
               key={`secF-${art.id}-${idx}`}
