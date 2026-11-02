@@ -80,30 +80,30 @@ export const Header: React.FC<HeaderProps> = ({
   return (
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
       {/* Top Utility Ticker Bar */}
-      <div className="border-b border-slate-100 dark:border-slate-800/80 text-[11px] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-slate-500 dark:text-slate-400 gap-2">
-        <div className="flex items-center gap-2 tracking-wide font-sans">
-          <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5">
-            <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+      <div className="border-b border-slate-100 dark:border-slate-800/80 text-[11px] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-slate-500 dark:text-slate-400 gap-2 min-w-0">
+        <div className="flex items-center gap-2 tracking-wide font-sans min-w-0 flex-wrap">
+          <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shrink-0">
+            <Clock className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             {istTime || 'IST Asia/Kolkata'}
           </span>
           <span className="text-slate-300 dark:text-slate-700" aria-hidden="true">·</span>
-          <span className="hidden sm:inline">
+          <span className="hidden sm:inline shrink-0">
             Priority: <strong className="text-blue-600 dark:text-blue-400 font-semibold">60% India</strong> / 40% World
           </span>
           <span className="hidden md:inline text-slate-300 dark:text-slate-700" aria-hidden="true">·</span>
-          <span className="hidden md:inline">
+          <span className="hidden md:inline truncate">
             Daily Automated Briefing: <span className="font-medium text-slate-700 dark:text-slate-300">06:30 AM IST</span>
           </span>
         </div>
 
-        <div className="flex items-center gap-3 ml-auto">
+        <div className="flex items-center gap-3 ml-auto shrink-0">
           {/* Typographic Font Resizer */}
           <div className="flex items-center border border-slate-200 dark:border-slate-700 rounded-lg overflow-hidden bg-slate-50 dark:bg-slate-800">
             {(['sm', 'md', 'lg'] as const).map(size => (
               <button
                 key={size}
                 onClick={() => onChangeFontSize(size)}
-                className={`px-2 py-0.5 text-[11px] font-semibold transition-colors ${
+                className={`px-2 py-0.5 text-[11px] font-semibold transition-colors cursor-pointer ${
                   fontSize === size 
                     ? 'bg-blue-600 text-white' 
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-100'
@@ -118,7 +118,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onManualRefresh}
             disabled={isRefreshing}
-            className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium text-[11px] transition-colors disabled:opacity-50"
+            className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium text-[11px] transition-colors disabled:opacity-50 cursor-pointer"
             title="Ingest fresh feeds and verify stories"
           >
             <RefreshCw className={`w-3 h-3 text-blue-600 dark:text-blue-400 ${isRefreshing ? 'animate-spin' : ''}`} />
@@ -127,31 +127,31 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Main Navbar matching Template Screenshot */}
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center justify-between gap-4">
+      {/* Main Navbar */}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex items-center justify-between gap-3 sm:gap-4 min-w-0">
         {/* Left: Brand Logo Wordmark */}
         <div 
           onClick={() => {
             onChangeView('frontpage');
             onSelectCategory('All');
           }}
-          className="flex items-center gap-2.5 cursor-pointer shrink-0 group"
+          className="flex items-center gap-2 sm:gap-2.5 cursor-pointer shrink-0 group min-w-0"
         >
-          <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-sm group-hover:bg-blue-700 transition-colors">
+          <div className="w-9 h-9 rounded-xl bg-blue-600 text-white flex items-center justify-center font-black text-lg shadow-sm group-hover:bg-blue-700 transition-colors shrink-0">
             W
           </div>
-          <div className="flex flex-col">
-            <span className="font-extrabold text-lg sm:text-xl font-sans tracking-tight text-slate-900 dark:text-white leading-none">
+          <div className="flex flex-col min-w-0">
+            <span className="font-extrabold text-base sm:text-xl font-sans tracking-tight text-slate-900 dark:text-white leading-none truncate">
               THE WORLD DAILY
             </span>
-            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide">
+            <span className="text-[10px] text-slate-500 dark:text-slate-400 font-medium tracking-wide truncate">
               Verified Global Briefing
             </span>
           </div>
         </div>
 
-        {/* Center: Clean Nav Links matching Screenshot */}
-        <nav className="hidden lg:flex items-center gap-1 xl:gap-2 text-xs font-semibold">
+        {/* Center: Desktop Nav Links with horizontal scroll protection */}
+        <nav className="hidden xl:flex items-center gap-1 xl:gap-1.5 text-xs font-semibold shrink-0">
           {NAV_ITEMS.map((item) => {
             const isActive = currentView === item.view && (item.view !== 'frontpage' || activeCategory === item.filter);
             return (
@@ -163,11 +163,9 @@ export const Header: React.FC<HeaderProps> = ({
                     onSelectCategory(item.filter);
                   }
                 }}
-                className={`px-3 py-1.5 rounded-lg transition-colors whitespace-nowrap relative flex items-center gap-1.5 ${
+                className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap relative flex items-center gap-1 cursor-pointer ${
                   isActive
                     ? item.isSpecial
-                      ? 'text-purple-600 dark:text-purple-400 font-bold bg-purple-50/70 dark:bg-purple-950/40'
-                      : 'text-blue-600 dark:text-blue-400 font-bold'
                     : item.isSpecial
                     ? 'text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-200'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'
@@ -181,7 +179,7 @@ export const Header: React.FC<HeaderProps> = ({
                   </span>
                 )}
                 {isActive && (
-                  <span className={`absolute bottom-0 left-3 right-3 h-0.5 rounded-full ${item.isSpecial ? 'bg-purple-600' : 'bg-blue-600'}`} />
+                  <span className={`absolute bottom-0 left-2.5 right-2.5 h-0.5 rounded-full ${item.isSpecial ? 'bg-purple-600' : 'bg-blue-600'}`} />
                 )}
               </button>
             );
@@ -189,21 +187,21 @@ export const Header: React.FC<HeaderProps> = ({
         </nav>
 
         {/* Right: Search + Icons */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-1.5 sm:gap-2.5 shrink-0">
           {/* Rounded Search Bar */}
-          <div className="relative w-40 sm:w-56 md:w-64">
+          <div className="relative w-36 sm:w-48 md:w-56">
             <Search className="w-3.5 h-3.5 absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 pointer-events-none" />
             <input
               type="text"
               value={searchQuery}
               onChange={(e) => onSearch(e.target.value)}
-              placeholder="Search news, topics..."
+              placeholder="Search news..."
               className="w-full pl-8 pr-7 py-1.5 text-xs rounded-full bg-slate-100 dark:bg-slate-800 border border-transparent focus:border-blue-400 dark:focus:border-blue-500 text-slate-900 dark:text-slate-100 placeholder-slate-400 focus:outline-none transition-all"
             />
             {searchQuery && (
               <button
                 onClick={() => onSearch('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs font-semibold"
+                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-700 text-xs font-semibold cursor-pointer"
               >
                 ✕
               </button>
@@ -214,7 +212,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenHealth}
             title="System & Feed Diagnostics"
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative cursor-pointer"
           >
             <Activity className="w-4 h-4" />
           </button>
@@ -223,7 +221,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenNotifications}
             title={isNotificationEnabled ? "Daily Briefing Notifications Active (06:30 AM IST)" : "Configure Daily Notifications"}
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative cursor-pointer"
             aria-label="Daily Notifications"
           >
             <Bell className="w-4 h-4" />
@@ -236,7 +234,7 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onOpenSaved}
             title="Saved Briefings"
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors relative cursor-pointer"
           >
             <Bookmark className="w-4 h-4" />
             {savedCount > 0 && (
@@ -250,15 +248,15 @@ export const Header: React.FC<HeaderProps> = ({
           <button
             onClick={onToggleDark}
             title={isDark ? "Switch to Daylight Mode" : "Switch to Night Mode"}
-            className="p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors"
+            className="p-1.5 sm:p-2 rounded-full hover:bg-slate-100 dark:hover:bg-slate-800 text-slate-600 dark:text-slate-400 transition-colors cursor-pointer"
           >
             {isDark ? <Sun className="w-4 h-4 text-amber-400" /> : <Moon className="w-4 h-4 text-slate-600" />}
           </button>
         </div>
       </div>
 
-      {/* Mobile Nav Row */}
-      <div className="lg:hidden flex items-center overflow-x-auto px-4 py-2 border-t border-slate-100 dark:border-slate-800 gap-2 no-scrollbar text-xs font-medium">
+      {/* Mobile & Tablet Nav Row (visible below xl screens) */}
+      <div className="xl:hidden flex items-center overflow-x-auto px-4 py-2 border-t border-slate-100 dark:border-slate-800 gap-1.5 no-scrollbar text-xs font-medium">
         {NAV_ITEMS.map((item) => {
           const isActive = currentView === item.view && (item.view !== 'frontpage' || activeCategory === item.filter);
           return (
@@ -270,7 +268,7 @@ export const Header: React.FC<HeaderProps> = ({
                   onSelectCategory(item.filter);
                 }
               }}
-              className={`px-3 py-1 rounded-full whitespace-nowrap text-xs flex items-center gap-1 ${
+              className={`px-3 py-1 rounded-full whitespace-nowrap text-xs flex items-center gap-1 shrink-0 cursor-pointer ${
                 isActive
                   ? item.isSpecial
                     ? 'bg-purple-600 text-white font-semibold'

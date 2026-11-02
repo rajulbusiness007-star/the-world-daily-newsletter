@@ -52,22 +52,40 @@ export const CATEGORY_IMAGE_MAP: Record<string, string[]> = {
   ]
 };
 
-// Fallback image generator
-export function getArticleImageUrl(article: {
+export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1200&q=80'; // Newspaper / journalism press
+
+/**
+ * Checks if an article has an authentic, verified photo directly from the newsroom
+ */
+export function isVerifiedArticleImage(article?: { imageUrl?: string }): boolean {
+  if (!article || !article.imageUrl) return false;
+  const url = article.imageUrl.trim();
+  if (!url.startsWith('http')) return false;
+  // If it is from the publisher's direct CDN or feed rather than a generic stock fallback
+  return !url.includes('images.unsplash.com');
+}
+
+/**
+ * Returns the best image URL for an article with robust fallback resolution
+ */
+export function getArticleImageUrl(article?: {
   id?: string;
   category?: string;
   headline?: string;
   imageUrl?: string;
 }): string {
-  if (article.imageUrl && article.imageUrl.startsWith('http')) {
-    return article.imageUrl;
+  if (!article) return DEFAULT_FALLBACK_IMAGE;
+
+  // Primary: Use article's direct image URL if valid
+  if (article.imageUrl && (article.imageUrl.startsWith('http://') || article.imageUrl.startsWith('https://'))) {
+    return article.imageUrl.trim();
   }
 
   const h = (article.headline || '').toLowerCase();
   const c = article.category || 'National & Regional';
 
   // Keyword-specific images for highest relevance
-  if (h.includes('supreme court') || h.includes('sc/st') || h.includes('bench') || h.includes('verdict')) {
+  if (h.includes('supreme court') || h.includes('sc/st') || h.includes('bench') || h.includes('verdict') || h.includes('court')) {
     return 'https://images.unsplash.com/photo-1589829545856-d10d557cf95f?auto=format&fit=crop&w=1200&q=80';
   }
   if (h.includes('rbi') || h.includes('repo rate') || h.includes('monetary policy') || h.includes('inflation')) {
@@ -85,7 +103,7 @@ export function getArticleImageUrl(article: {
   if (h.includes('ai') || h.includes('nvidia') || h.includes('blackwell') || h.includes('model') || h.includes('algorithm')) {
     return 'https://images.unsplash.com/photo-1677442136019-21780efad99a?auto=format&fit=crop&w=1200&q=80';
   }
-  if (h.includes('tejas') || h.includes('iaf') || h.includes('fighter') || h.includes('defence')) {
+  if (h.includes('tejas') || h.includes('iaf') || h.includes('fighter') || h.includes('defence') || h.includes('military')) {
     return 'https://images.unsplash.com/photo-1579975096649-e773152b04cb?auto=format&fit=crop&w=1200&q=80';
   }
   if (h.includes('rail') || h.includes('train') || h.includes('kavach') || h.includes('track')) {
@@ -103,13 +121,12 @@ export function getArticleImageUrl(article: {
   if (h.includes('fed') || h.includes('interest rate') || h.includes('stock') || h.includes('market')) {
     return 'https://images.unsplash.com/photo-1590283603385-17ffb3a7f29f?auto=format&fit=crop&w=1200&q=80';
   }
-  if (h.includes('british energy') || h.includes('wind') || h.includes('solar')) {
+  if (h.includes('wind') || h.includes('solar') || h.includes('energy')) {
     return 'https://images.unsplash.com/photo-1466611653911-95081537e5b7?auto=format&fit=crop&w=1200&q=80';
   }
 
   // Fallback to Category List
   const pool = CATEGORY_IMAGE_MAP[c] || CATEGORY_IMAGE_MAP['National & Regional'];
-  // Deterministic index from article ID or headline
   const seedStr = (article.id || article.headline || 'news');
   let hash = 0;
   for (let i = 0; i < seedStr.length; i++) {
@@ -119,6 +136,3 @@ export function getArticleImageUrl(article: {
   const index = Math.abs(hash) % pool.length;
   return pool[index];
 }
-
-// Global Image Component with automatic fallback protection
-export const DEFAULT_FALLBACK_IMAGE = 'https://images.unsplash.com/photo-1585829365295-ab7cd400c167?auto=format&fit=crop&w=1200&q=80'; // Newspaper / journalism press
