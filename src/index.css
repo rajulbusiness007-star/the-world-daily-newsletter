@@ -19,17 +19,32 @@
   body {
     font-family: var(--font-sans);
     transition: background-color 250ms var(--ease-out-expo), color 250ms var(--ease-out-expo);
+    overflow-x: hidden;
   }
 
-  h1, h2, h3, .font-editorial {
+  h1, h2, h3, h4, .font-editorial {
     font-family: var(--font-serif);
-    text-wrap: balance;
+    overflow-wrap: break-word;
   }
 
   .font-masthead {
     font-family: var(--font-headline);
     letter-spacing: -0.01em;
   }
+}
+
+/* Word wrapping and overflow safeguards */
+*, ::before, ::after {
+  overflow-wrap: break-word;
+}
+
+.break-words {
+  overflow-wrap: break-word;
+  word-break: break-word;
+}
+
+.min-w-0 {
+  min-width: 0px;
 }
 
 /* Classical broadsheet borders */
