@@ -31,6 +31,34 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     isStateControlled: false
   },
   {
+    id: 'the-new-indian-express',
+    name: 'The New Indian Express',
+    website: 'https://www.newindianexpress.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'Express Publications (Madurai) Limited',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.newindianexpress.com',
+    rssUrl: 'https://www.newindianexpress.com/Nation/rssfeed/?id=170&getcontent=1',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'times-of-india',
+    name: 'The Times of India',
+    website: 'https://timesofindia.indiatimes.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'Bennett, Coleman & Co. Ltd. (The Times Group)',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://timesofindia.indiatimes.com/terms-and-conditions',
+    rssUrl: 'https://timesofindia.indiatimes.com/rssfeedstopstories.cms',
+    active: true,
+    isStateControlled: false
+  },
+  {
     id: 'pti',
     name: 'Press Trust of India (PTI)',
     website: 'https://www.pti.in',
@@ -40,7 +68,7 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     funding: 'Syndication fees from member organisations',
     sourceType: 'Wire Agency',
     editorialStandardsUrl: 'https://www.pti.in/aboutus.aspx',
-    rssUrl: 'https://www.thehindu.com/news/national/feeder/default.rss', // PTI syndicates through leading members
+    rssUrl: 'https://www.thehindu.com/news/national/feeder/default.rss',
     active: true,
     isStateControlled: false,
     requiresLicensingOrApi: true
@@ -116,6 +144,48 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     isStateControlled: false
   },
   {
+    id: 'the-wire',
+    name: 'The Wire',
+    website: 'https://thewire.in',
+    country: 'India',
+    category: 'National',
+    ownership: 'Foundation for Independent Journalism (Not-for-profit)',
+    funding: 'Reader donations and independent public grants',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://thewire.in/about-us',
+    rssUrl: 'https://thewire.in/rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'firstpost',
+    name: 'Firstpost',
+    website: 'https://www.firstpost.com',
+    country: 'India',
+    category: 'National',
+    ownership: 'Network18 Media & Investments (Reliance Industries)',
+    funding: 'Digital advertising and syndication',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.firstpost.com/terms-of-use',
+    rssUrl: 'https://www.firstpost.com/rss/india.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'wion',
+    name: 'WION (World Is One News)',
+    website: 'https://www.wionews.com',
+    country: 'India',
+    category: 'International',
+    ownership: 'Zee Media Corporation Ltd',
+    funding: 'Broadcast carriage and advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.wionews.com/about-us',
+    rssUrl: 'https://www.wionews.com/feeds/india/rss.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
     id: 'dd-news',
     name: 'DD News',
     website: 'https://ddnews.gov.in',
@@ -127,7 +197,7 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     editorialStandardsUrl: 'https://prasarbharati.gov.in',
     rssUrl: 'https://ddnews.gov.in/en/feed/',
     active: true,
-    isStateControlled: false // Autonomous public broadcaster under parliamentary statute
+    isStateControlled: false
   },
 
   // --- INDIAN BUSINESS & FINANCIAL REPORTING ---
@@ -201,7 +271,7 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     editorialStandardsUrl: 'https://pib.gov.in/aboutus.aspx',
     rssUrl: 'https://pib.gov.in/RssMain.aspx?ModId=6&Lang=1',
     active: true,
-    isStateControlled: false // Treated strictly as official primary government statement, not independent reporting
+    isStateControlled: false
   },
   {
     id: 'rbi',
@@ -285,10 +355,24 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     sourceType: 'Government Official',
     editorialStandardsUrl: 'https://factcheck.pib.gov.in',
     active: true,
-    isStateControlled: false // NOTE: Clearly presented as government fact-checking source per prompt instructions
+    isStateControlled: false
   },
 
   // --- INTERNATIONAL: UNITED STATES ---
+  {
+    id: 'cnn',
+    name: 'CNN International',
+    website: 'https://edition.cnn.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Warner Bros. Discovery (CNN Worldwide)',
+    funding: 'Broadcast carriage subscriptions, commercial advertising, digital syndication',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://edition.cnn.com/standards-and-practices',
+    rssUrl: 'http://rss.cnn.com/rss/edition_world.rss',
+    active: true,
+    isStateControlled: false
+  },
   {
     id: 'ap-news',
     name: 'Associated Press (AP)',
@@ -318,16 +402,58 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     isStateControlled: false
   },
   {
-    id: 'cnn',
-    name: 'CNN International',
-    website: 'https://edition.cnn.com',
+    id: 'new-york-times',
+    name: 'The New York Times',
+    website: 'https://www.nytimes.com',
     country: 'United States',
     category: 'International',
-    ownership: 'Warner Bros. Discovery (CNN Worldwide)',
-    funding: 'Broadcast carriage subscriptions, commercial advertising, digital syndication',
+    ownership: 'The New York Times Company (Sulzberger family trust)',
+    funding: 'Digital & print subscriptions',
     sourceType: 'Independent National',
-    editorialStandardsUrl: 'https://edition.cnn.com/standards-and-practices',
-    rssUrl: 'http://rss.cnn.com/rss/edition_world.rss',
+    editorialStandardsUrl: 'https://www.nytimes.com/editorial-standards',
+    rssUrl: 'https://rss.nytimes.com/services/xml/rss/nyt/World.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'washington-post',
+    name: 'The Washington Post',
+    website: 'https://www.washingtonpost.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Nash Holdings (Jeff Bezos)',
+    funding: 'Subscriptions and commercial advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.washingtonpost.com/policies-and-standards/',
+    rssUrl: 'https://feeds.washingtonpost.com/rss/world',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'us-news',
+    name: 'U.S. News & World Report',
+    website: 'https://www.usnews.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'U.S. News & World Report, L.P. (Mortimer Zuckerman)',
+    funding: 'Digital advertising and rankings licensing',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.usnews.com/info/features/about-us',
+    rssUrl: 'https://www.usnews.com/rss/news',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'fox-news',
+    name: 'Fox News',
+    website: 'https://www.foxnews.com',
+    country: 'United States',
+    category: 'International',
+    ownership: 'Fox Corporation (Murdoch Family)',
+    funding: 'Cable carriage fees and advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.foxnews.com/terms-of-use',
+    rssUrl: 'https://moxie.foxnews.com/google-publisher/world.xml',
     active: true,
     isStateControlled: false
   },
@@ -376,6 +502,20 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     isStateControlled: false
   },
   {
+    id: 'sky-news',
+    name: 'Sky News',
+    website: 'https://news.sky.com',
+    country: 'United Kingdom',
+    category: 'International',
+    ownership: 'Sky Group (Comcast Corporation)',
+    funding: 'Broadcast carriage and advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://news.sky.com/info/editorial-guidelines',
+    rssUrl: 'https://feeds.skynews.com/feeds/rss/world.xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
     id: 'the-guardian',
     name: 'The Guardian',
     website: 'https://www.theguardian.com',
@@ -386,6 +526,20 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     sourceType: 'Independent National',
     editorialStandardsUrl: 'https://www.theguardian.com/info/2015/aug/05/the-guardians-editorial-code',
     rssUrl: 'https://www.theguardian.com/world/rss',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'the-telegraph',
+    name: 'The Daily Telegraph',
+    website: 'https://www.telegraph.co.uk',
+    country: 'United Kingdom',
+    category: 'International',
+    ownership: 'Telegraph Media Group',
+    funding: 'Print & digital subscriptions, advertising',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.telegraph.co.uk/editorial-guidelines/',
+    rssUrl: 'https://www.telegraph.co.uk/rss.xml',
     active: true,
     isStateControlled: false
   },
@@ -491,7 +645,35 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     editorialStandardsUrl: 'https://www.scmp.com/editorial-standards',
     rssUrl: 'https://www.scmp.com/rss/91/feed',
     active: true,
-    isStateControlled: false // Hong Kong commercial publication with independent editorial board
+    isStateControlled: false
+  },
+  {
+    id: 'cna',
+    name: 'CNA (Channel NewsAsia)',
+    website: 'https://www.channelnewsasia.com',
+    country: 'Singapore',
+    category: 'International',
+    ownership: 'Mediacorp (Temasek Holdings)',
+    funding: 'Commercial revenue and statutory broadcasting grant',
+    sourceType: 'Public Broadcaster',
+    editorialStandardsUrl: 'https://www.channelnewsasia.com/about-us',
+    rssUrl: 'https://www.channelnewsasia.com/api/v1/rss-outbound-feed?_format=xml',
+    active: true,
+    isStateControlled: false
+  },
+  {
+    id: 'straits-times',
+    name: 'The Straits Times',
+    website: 'https://www.straitstimes.com',
+    country: 'Singapore',
+    category: 'International',
+    ownership: 'SPH Media Trust (Not-for-profit company limited by guarantee)',
+    funding: 'Subscriptions, advertising & government grant funding',
+    sourceType: 'Independent National',
+    editorialStandardsUrl: 'https://www.straitstimes.com/terms-and-conditions',
+    rssUrl: 'https://www.straitstimes.com/news/world/rss.xml',
+    active: true,
+    isStateControlled: false
   },
   {
     id: 'nikkei-asia',
@@ -547,7 +729,7 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     sourceType: 'State-Controlled Media',
     editorialStandardsUrl: 'http://www.xinhuanet.com/english/about.htm',
     active: true,
-    isStateControlled: true // Explicitly flagged per section 3 instructions
+    isStateControlled: true
   },
   {
     id: 'cgtn',
@@ -574,6 +756,34 @@ export const SOURCES_REGISTRY: NewsSource[] = [
     editorialStandardsUrl: 'https://www.chinadaily.com.cn',
     active: true,
     isStateControlled: true
+  },
+  {
+    id: 'rt',
+    name: 'RT (Russia Today)',
+    website: 'https://www.rt.com',
+    country: 'Russia',
+    category: 'Official',
+    ownership: 'ANO TV-Novosti (Funded by the Russian Federation)',
+    funding: 'Federal state budget of the Russian Federation',
+    sourceType: 'State-Controlled Media',
+    editorialStandardsUrl: 'https://www.rt.com/about-us/',
+    rssUrl: 'https://www.rt.com/rss/news/',
+    active: true,
+    isStateControlled: true
+  },
+  {
+    id: 'tass',
+    name: 'TASS Russian News Agency',
+    website: 'https://tass.com',
+    country: 'Russia',
+    category: 'Official',
+    ownership: 'Government of the Russian Federation',
+    funding: 'Federal state subsidy and news syndication',
+    sourceType: 'State-Controlled Media',
+    editorialStandardsUrl: 'https://tass.com/about',
+    rssUrl: 'https://tass.com/rss/v2.xml',
+    active: true,
+    isStateControlled: true
   }
 ];
 
@@ -587,20 +797,29 @@ export function getActiveRssFeeds(): NewsSource[] {
 
 export const TRUSTED_CORE_OUTLET_IDS = [
   'indian-express',
-  'bbc-news',
-  'cnn',
-  'al-jazeera',
   'the-hindu',
+  'times-of-india',
+  'the-new-indian-express',
+  'cnn',
+  'bbc-news',
   'reuters',
   'ap-news',
   'the-guardian',
   'financial-times',
+  'new-york-times',
+  'washington-post',
+  'us-news',
+  'sky-news',
+  'the-telegraph',
+  'al-jazeera',
   'dw',
   'france-24',
-  'ndtv'
+  'ndtv',
+  'scmp',
+  'wion',
+  'cna'
 ];
 
 export function getTrustedCoreOutlets(): NewsSource[] {
   return SOURCES_REGISTRY.filter(s => TRUSTED_CORE_OUTLET_IDS.includes(s.id));
 }
-
