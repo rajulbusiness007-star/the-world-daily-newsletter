@@ -1,0 +1,50 @@
+name: Daily Newsletter Auto-Update
+
+on:
+  schedule:
+    # 01:00 UTC is exactly 06:30 AM IST (Indian Standard Time is UTC + 5:30)
+    # This is the official daily publication time for The World Daily
+    - cron: '0 1 * * *'
+    # Evening update at 13:00 UTC (06:30 PM IST) for breaking global & national reports
+    - cron: '0 13 * * *'
+  workflow_dispatch: # Enables manual one-click trigger from GitHub Actions dashboard
+
+permissions:
+  contents: write
+
+jobs:
+  update-daily-newsletter:
+    name: Autonomous Daily Edition Ingestion & Build
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Setup Node.js 20
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm install --legacy-peer-deps
+
+      - name: Execute Autonomous Daily Update
+        run: npm run auto-update
+
+      - name: Commit and Push Updated Edition
+        run: |
+          git config --global user.name "The World Daily Automation Bot"
+          git config --global user.email "bot@theworlddaily.org"
+          git add data/news_db.json public/data/news_db.json
+          if git diff --staged --quiet; then
+            echo "Database already current. No changes to commit."
+          else
+            TODAY=$(date -u +"%Y-%m-%d")
+            git commit -m "chore(automated): daily newsletter edition update for ${TODAY} [skip ci]"
+            git push origin main
+          fi
