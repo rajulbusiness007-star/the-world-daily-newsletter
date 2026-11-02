@@ -9,6 +9,7 @@ interface RawItem {
   contentSnippet?: string;
   content?: string;
   sourceId: string;
+  imageUrl?: string;
 }
 
 // Banned sensational/clickbait/rumour patterns per Misinformation Protection
@@ -171,7 +172,7 @@ export function categorizeArticle(title: string, snippet: string, defaultCountry
     return { category: 'Technology & AI', subCategory: 'Artificial Intelligence & Tech', country };
   }
 
-  if (text.includes('supreme court') || text.includes('high court') || text.includes('judgment') || text.includes('verdict') || text.includes('bail') || text.includes('constitution') || text.includes('bench') || text.includes('c汲')) {
+  if (text.includes('supreme court') || text.includes('high court') || text.includes('judgment') || text.includes('verdict') || text.includes('bail') || text.includes('constitution') || text.includes('bench') || text.includes('cji')) {
     return { category: 'Courts & Legal', subCategory: 'Judicial Orders', country };
   }
 
@@ -201,12 +202,17 @@ function cleanHeadline(title: string): string {
   return title
     .replace(/\s*\|\s*The Hindu$/i, '')
     .replace(/\s*\|\s*India News - The Indian Express$/i, '')
+    .replace(/\s*\|\s*Times of India$/i, '')
     .replace(/\s*-\s*BBC News$/i, '')
     .replace(/\s*-\s*The Guardian$/i, '')
     .replace(/\s*-\s*Reuters$/i, '')
     .replace(/\s*\|\s*Reuters$/i, '')
     .replace(/\s*\|\s*Business Standard News$/i, '')
     .replace(/\s*\|\s*Livemint$/i, '')
+    .replace(/\s*-\s*The New York Times$/i, '')
+    .replace(/\s*-\s*The Washington Post$/i, '')
+    .replace(/\s*-\s*CNN$/i, '')
+    .replace(/\s*-\s*Sky News$/i, '')
     .replace(/<[^>]*>?/gm, '')
     .trim();
 }
@@ -443,10 +449,9 @@ export function runVerificationPipeline(rawItems: RawItem[]): Article[] {
       location: country === 'India' ? (subCategory.includes('State') ? 'New Delhi / Regional' : 'New Delhi, India') : country,
       isPeerReviewedScience: category === 'Science & Environment' && !headline.toLowerCase().includes('preliminary'),
       isStateMedia: source.isStateControlled,
-      imageUrl: resolveEditorialImage(headline, category)
+      imageUrl: primaryItem.imageUrl || resolveEditorialImage(headline, category)
     });
   }
 
   return processedArticles;
 }
-

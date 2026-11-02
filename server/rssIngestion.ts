@@ -12,13 +12,62 @@ const xmlParser = new XMLParser({
   parseTagValue: false
 });
 
-interface RawItem {
+export interface RawItem {
   title: string;
   link: string;
   pubDate?: string;
   contentSnippet?: string;
   content?: string;
   sourceId: string;
+  imageUrl?: string;
+}
+
+/**
+ * Extracts the best candidate image URL from an RSS or Atom XML item object
+ */
+function extractImageUrl(item: any, description: string, contentEncoded: string = ''): string | undefined {
+  // 1. media:content
+  if (item['media:content']) {
+    const mc = Array.isArray(item['media:content']) ? item['media:content'][0] : item['media:content'];
+    const url = mc?.['@_url'] || mc?.['@_href'];
+    if (url && typeof url === 'string' && url.startsWith('http')) return url.trim();
+  }
+
+  // 2. enclosure tag
+  if (item.enclosure) {
+    const enc = Array.isArray(item.enclosure) ? item.enclosure[0] : item.enclosure;
+    const url = enc?.['@_url'] || enc?.['@_href'];
+    const type = enc?.['@_type'] || '';
+    if (url && typeof url === 'string' && (type.startsWith('image') || /\.(jpg|jpeg|png|webp|avif)/i.test(url))) {
+      return url.trim();
+    }
+  }
+
+  // 3. media:thumbnail
+  if (item['media:thumbnail']) {
+    const mt = Array.isArray(item['media:thumbnail']) ? item['media:thumbnail'][0] : item['media:thumbnail'];
+    const url = mt?.['@_url'] || mt?.['@_href'];
+    if (url && typeof url === 'string' && url.startsWith('http')) return url.trim();
+  }
+
+  // 4. image tag inside channel/item
+  if (item.image) {
+    const url = typeof item.image === 'string' ? item.image : item.image?.url || item.image?.['#text'];
+    if (url && typeof url === 'string' && url.startsWith('http')) return url.trim();
+  }
+
+  // 5. Embedded <img> in description or content:encoded
+  const combinedHtml = `${description} ${contentEncoded}`;
+  const imgMatch = combinedHtml.match(/<img[^>]+src=["'](https?:\/\/[^"'>]+)["']/i);
+  if (imgMatch && imgMatch[1]) {
+    const candidate = imgMatch[1];
+    // Exclude tracking pixels and feedburner logos
+    if (!candidate.includes('1x1') && !candidate.includes('feedburner.com/~r/')) {
+      return candidate.trim();
+    }
+  }
+
+  return undefined;
 }
 
 /**
@@ -58,6 +107,9 @@ async function fetchSourceFeed(sourceId: string, rssUrl: string): Promise<RawIte
         const pubDate = item.pubDate || item['dc:date'] || item.updated;
         const description = item.description || item['content:encoded'] || '';
         const snippet = typeof description === 'string' ? description : description?.['#text'] || '';
+        const encoded = typeof item['content:encoded'] === 'string' ? item['content:encoded'] : '';
+
+        const imageUrl = extractImageUrl(item, snippet, encoded);
 
         if (title && link) {
           rawItems.push({
@@ -65,7 +117,8 @@ async function fetchSourceFeed(sourceId: string, rssUrl: string): Promise<RawIte
             link: link.trim(),
             pubDate: pubDate ? new Date(pubDate).toISOString() : new Date().toISOString(),
             contentSnippet: snippet.replace(/<[^>]*>?/gm, '').trim(),
-            sourceId
+            sourceId,
+            imageUrl
           });
         }
       }
@@ -84,13 +137,16 @@ async function fetchSourceFeed(sourceId: string, rssUrl: string): Promise<RawIte
         const summary = entry.summary || entry.content || '';
         const snippet = typeof summary === 'string' ? summary : summary?.['#text'] || '';
 
+        const imageUrl = extractImageUrl(entry, snippet, '');
+
         if (title && link) {
           rawItems.push({
             title: title.trim(),
             link: link.trim(),
             pubDate: pubDate ? new Date(pubDate).toISOString() : new Date().toISOString(),
             contentSnippet: snippet.replace(/<[^>]*>?/gm, '').trim(),
-            sourceId
+            sourceId,
+            imageUrl
           });
         }
       }
