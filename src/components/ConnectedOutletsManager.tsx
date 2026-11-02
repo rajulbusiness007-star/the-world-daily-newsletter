@@ -35,45 +35,6 @@ export const TRUSTED_OUTLETS_DATA: OutletMeta[] = [
     tagline: 'Journalism of Courage · Deep Investigative, Judicial & Governance Reporting'
   },
   {
-    id: 'bbc-news',
-    name: 'BBC News',
-    shortName: 'BBC News',
-    country: 'United Kingdom',
-    flag: '🇬🇧',
-    type: 'Public Broadcaster',
-    ownership: 'British Broadcasting Corporation (Royal Charter)',
-    funding: 'UK Television licence fee & BBC Studios commercial revenue',
-    website: 'https://www.bbc.com/news',
-    color: 'border-rose-600 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200',
-    tagline: 'Royal Charter Public Broadcaster · Gold Standard Verification & Science'
-  },
-  {
-    id: 'cnn',
-    name: 'CNN International',
-    shortName: 'CNN',
-    country: 'United States',
-    flag: '🇺🇸',
-    type: 'Independent National',
-    ownership: 'Warner Bros. Discovery (CNN Worldwide)',
-    funding: 'Broadcast carriage subscriptions, digital advertising & licensing',
-    website: 'https://edition.cnn.com',
-    color: 'border-red-600 bg-red-50 dark:bg-red-950/40 text-red-900 dark:text-red-200',
-    tagline: '24/7 Global News Network · US Policy, Frontier AI & Economic Infrastructure'
-  },
-  {
-    id: 'al-jazeera',
-    name: 'Al Jazeera English',
-    shortName: 'Al Jazeera',
-    country: 'Global / Middle East',
-    flag: '🌍',
-    type: 'Public Broadcaster',
-    ownership: 'Al Jazeera Media Network (Funded by the State of Qatar)',
-    funding: 'Public grant from State of Qatar and commercial revenue',
-    website: 'https://www.aljazeera.com',
-    color: 'border-orange-600 bg-orange-50 dark:bg-orange-950/40 text-orange-900 dark:text-orange-200',
-    tagline: 'In-Depth Global South Coverage · Middle East Diplomacy & Energy Grids'
-  },
-  {
     id: 'the-hindu',
     name: 'The Hindu',
     shortName: 'The Hindu',
@@ -87,10 +48,166 @@ export const TRUSTED_OUTLETS_DATA: OutletMeta[] = [
     tagline: 'Founded 1878 · India’s National Paper of Record with Independent Reader’s Editor'
   },
   {
+    id: 'the-new-indian-express',
+    name: 'The New Indian Express',
+    shortName: 'Hindu Express / TNIE',
+    country: 'India',
+    flag: '🇮🇳',
+    type: 'Independent National',
+    ownership: 'Express Publications (Madurai) Limited',
+    funding: 'Subscriptions and advertising',
+    website: 'https://www.newindianexpress.com',
+    color: 'border-indigo-600 bg-indigo-50 dark:bg-indigo-950/40 text-indigo-900 dark:text-indigo-200',
+    tagline: 'National & Southern States Record · Independent Editorial Voice'
+  },
+  {
+    id: 'times-of-india',
+    name: 'The Times of India',
+    shortName: 'Times of India',
+    country: 'India',
+    flag: '🇮🇳',
+    type: 'Independent National',
+    ownership: 'Bennett, Coleman & Co. Ltd. (The Times Group)',
+    funding: 'Subscriptions and commercial advertising',
+    website: 'https://timesofindia.indiatimes.com',
+    color: 'border-red-600 bg-red-50 dark:bg-red-950/40 text-red-900 dark:text-red-200',
+    tagline: 'Founded 1838 · Widest Circulated English National Daily in India'
+  },
+  {
+    id: 'cnn',
+    name: 'CNN International',
+    shortName: 'CNN News',
+    country: 'United States',
+    flag: '🇺🇸',
+    type: 'Independent National',
+    ownership: 'Warner Bros. Discovery (CNN Worldwide)',
+    funding: 'Broadcast carriage subscriptions, digital advertising & licensing',
+    website: 'https://edition.cnn.com',
+    color: 'border-red-600 bg-red-50 dark:bg-red-950/40 text-red-900 dark:text-red-200',
+    tagline: '24/7 Global News Network · US Policy, Frontier AI & Economic Infrastructure'
+  },
+  {
+    id: 'bbc-news',
+    name: 'BBC News',
+    shortName: 'BBC News',
+    country: 'United Kingdom',
+    flag: '🇬🇧',
+    type: 'Public Broadcaster',
+    ownership: 'British Broadcasting Corporation (Royal Charter)',
+    funding: 'UK Television licence fee & BBC Studios commercial revenue',
+    website: 'https://www.bbc.com/news',
+    color: 'border-rose-600 bg-rose-50 dark:bg-rose-950/40 text-rose-900 dark:text-rose-200',
+    tagline: 'Royal Charter Public Broadcaster · Gold Standard Verification & Science'
+  },
+  {
+    id: 'us-news',
+    name: 'U.S. News & World Report',
+    shortName: 'US News',
+    country: 'United States',
+    flag: '🇺🇸',
+    type: 'Independent National',
+    ownership: 'U.S. News & World Report, L.P. (Mortimer Zuckerman)',
+    funding: 'Digital advertising and rankings licensing',
+    website: 'https://www.usnews.com',
+    color: 'border-blue-700 bg-blue-50 dark:bg-blue-950/40 text-blue-900 dark:text-blue-200',
+    tagline: 'Authoritative Rankings, Policy Analysis & Global Affairs'
+  },
+  {
+    id: 'new-york-times',
+    name: 'The New York Times',
+    shortName: 'NY Times',
+    country: 'United States',
+    flag: '🇺🇸',
+    type: 'Independent National',
+    ownership: 'The New York Times Company (Sulzberger family)',
+    funding: 'Digital & print subscriptions',
+    website: 'https://www.nytimes.com',
+    color: 'border-slate-800 bg-slate-50 dark:bg-slate-900 text-slate-900 dark:text-slate-100',
+    tagline: 'All the News That\'s Fit to Print · Pulitzer-Winning Global Dispatches'
+  },
+  {
+    id: 'washington-post',
+    name: 'The Washington Post',
+    shortName: 'Washington Post',
+    country: 'United States',
+    flag: '🇺🇸',
+    type: 'Independent National',
+    ownership: 'Nash Holdings (Jeff Bezos)',
+    funding: 'Subscriptions and commercial advertising',
+    website: 'https://www.washingtonpost.com',
+    color: 'border-stone-700 bg-stone-50 dark:bg-stone-900 text-stone-900 dark:text-stone-100',
+    tagline: 'Democracy Dies in Darkness · White House & International Reporting'
+  },
+  {
+    id: 'fox-news',
+    name: 'Fox News',
+    shortName: 'Fox News',
+    country: 'United States',
+    flag: '🇺🇸',
+    type: 'Independent National',
+    ownership: 'Fox Corporation (Murdoch Family)',
+    funding: 'Cable carriage fees and commercial advertising',
+    website: 'https://www.foxnews.com',
+    color: 'border-blue-900 bg-blue-50 dark:bg-blue-950/40 text-blue-950 dark:text-blue-200',
+    tagline: 'US National Politics, Defense & International Developments'
+  },
+  {
+    id: 'sky-news',
+    name: 'Sky News',
+    shortName: 'Sky News UK',
+    country: 'United Kingdom',
+    flag: '🇬🇧',
+    type: 'Independent National',
+    ownership: 'Sky Group (Comcast Corporation)',
+    funding: 'Broadcast carriage and advertising',
+    website: 'https://news.sky.com',
+    color: 'border-red-700 bg-red-50 dark:bg-red-950/30 text-red-900 dark:text-red-200',
+    tagline: 'First for Breaking News Across the UK, Europe & the World'
+  },
+  {
+    id: 'the-telegraph',
+    name: 'The Daily Telegraph',
+    shortName: 'The Telegraph',
+    country: 'United Kingdom',
+    flag: '🇬🇧',
+    type: 'Independent National',
+    ownership: 'Telegraph Media Group',
+    funding: 'Print & digital subscriptions, advertising',
+    website: 'https://www.telegraph.co.uk',
+    color: 'border-emerald-800 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-950 dark:text-emerald-200',
+    tagline: 'Founded 1855 · British National Broadsheet & International Geopolitics'
+  },
+  {
+    id: 'scmp',
+    name: 'South China Morning Post',
+    shortName: 'China News (SCMP)',
+    country: 'China / HK',
+    flag: '🇨🇳',
+    type: 'Independent National',
+    ownership: 'Alibaba Group (Hong Kong based)',
+    funding: 'Digital subscriptions, advertising, events',
+    website: 'https://www.scmp.com',
+    color: 'border-yellow-600 bg-yellow-50 dark:bg-yellow-950/40 text-yellow-900 dark:text-yellow-200',
+    tagline: 'China Economic Policy, Tech Giants, Trade & Cross-Strait Affairs'
+  },
+  {
+    id: 'cna',
+    name: 'CNA (Channel NewsAsia)',
+    shortName: 'CNA Asia',
+    country: 'Singapore',
+    flag: '🇸🇬',
+    type: 'Public Broadcaster',
+    ownership: 'Mediacorp (Temasek Holdings)',
+    funding: 'Commercial revenue and statutory broadcasting grant',
+    website: 'https://www.channelnewsasia.com',
+    color: 'border-red-600 bg-red-50 dark:bg-red-950/30 text-red-900 dark:text-red-200',
+    tagline: 'Asia-Pacific Geopolitics, ASEAN Trade & Emerging Market Economics'
+  },
+  {
     id: 'reuters',
     name: 'Reuters',
     shortName: 'Reuters',
-    country: 'United States',
+    country: 'United States / UK',
     flag: '📡',
     type: 'Wire Agency',
     ownership: 'Thomson Reuters Corporation',
@@ -111,6 +228,19 @@ export const TRUSTED_OUTLETS_DATA: OutletMeta[] = [
     website: 'https://apnews.com',
     color: 'border-stone-600 bg-stone-100 dark:bg-stone-900 text-stone-900 dark:text-stone-100',
     tagline: 'Founded 1846 · Independent Not-for-Profit Cooperative Wire Service'
+  },
+  {
+    id: 'al-jazeera',
+    name: 'Al Jazeera English',
+    shortName: 'Al Jazeera',
+    country: 'Global / Middle East',
+    flag: '🌍',
+    type: 'Public Broadcaster',
+    ownership: 'Al Jazeera Media Network (Funded by the State of Qatar)',
+    funding: 'Public grant from State of Qatar and commercial revenue',
+    website: 'https://www.aljazeera.com',
+    color: 'border-orange-600 bg-orange-50 dark:bg-orange-950/40 text-orange-900 dark:text-orange-200',
+    tagline: 'In-Depth Global South Coverage · Middle East Diplomacy & Energy Grids'
   },
   {
     id: 'the-guardian',
@@ -137,6 +267,45 @@ export const TRUSTED_OUTLETS_DATA: OutletMeta[] = [
     website: 'https://www.ft.com',
     color: 'border-yellow-700 bg-amber-50 dark:bg-amber-950/30 text-amber-950 dark:text-amber-100',
     tagline: 'Global Business, Central Bank Benchmark Review & International Finance'
+  },
+  {
+    id: 'dw',
+    name: 'Deutsche Welle (DW)',
+    shortName: 'DW Europe',
+    country: 'Europe',
+    flag: '🇪🇺',
+    type: 'Public Broadcaster',
+    ownership: 'German public international broadcaster',
+    funding: 'Federal tax revenue',
+    website: 'https://www.dw.com',
+    color: 'border-blue-600 bg-blue-50 dark:bg-blue-950/30 text-blue-900 dark:text-blue-200',
+    tagline: 'Independent German International Broadcaster · European Union Policy'
+  },
+  {
+    id: 'wion',
+    name: 'WION (World Is One News)',
+    shortName: 'WION News',
+    country: 'India',
+    flag: '🇮🇳',
+    type: 'Independent National',
+    ownership: 'Zee Media Corporation Ltd',
+    funding: 'Broadcast carriage and advertising',
+    website: 'https://www.wionews.com',
+    color: 'border-teal-600 bg-teal-50 dark:bg-teal-950/30 text-teal-900 dark:text-teal-200',
+    tagline: 'Indian Global News Perspective · Foreign Affairs & Geopolitics'
+  },
+  {
+    id: 'ndtv',
+    name: 'NDTV',
+    shortName: 'NDTV',
+    country: 'India',
+    flag: '🇮🇳',
+    type: 'Independent National',
+    ownership: 'AMG Media Networks (Adani Group)',
+    funding: 'Broadcast carriage, subscriptions, advertising',
+    website: 'https://www.ndtv.com',
+    color: 'border-emerald-600 bg-emerald-50 dark:bg-emerald-950/30 text-emerald-900 dark:text-emerald-200',
+    tagline: 'Pioneering Indian News Network · National Dispatches & Regional Ground Reports'
   }
 ];
 
@@ -172,7 +341,28 @@ export function isArticleFromOutlet(art: Article, outletId: string): boolean {
   const pub = (art.publisher || '').toLowerCase();
   const name = meta.name.toLowerCase();
   const short = meta.shortName.toLowerCase();
-  return pub.includes(name) || pub.includes(short) || (outletId === 'the-hindu' && pub.includes('hindu')) || (outletId === 'indian-express' && pub.includes('indian express')) || (outletId === 'al-jazeera' && pub.includes('al jazeera')) || (outletId === 'cnn' && pub.includes('cnn')) || (outletId === 'bbc-news' && pub.includes('bbc'));
+
+  if (pub.includes(name) || pub.includes(short)) return true;
+  if (outletId === 'the-hindu' && pub.includes('hindu')) return true;
+  if (outletId === 'indian-express' && pub.includes('indian express')) return true;
+  if (outletId === 'the-new-indian-express' && (pub.includes('new indian express') || pub.includes('hindu express') || pub.includes('express publications'))) return true;
+  if (outletId === 'times-of-india' && (pub.includes('times of india') || pub.includes('toi'))) return true;
+  if (outletId === 'cnn' && pub.includes('cnn')) return true;
+  if (outletId === 'bbc-news' && pub.includes('bbc')) return true;
+  if (outletId === 'us-news' && (pub.includes('us news') || pub.includes('u.s. news'))) return true;
+  if (outletId === 'new-york-times' && (pub.includes('new york times') || pub.includes('nyt'))) return true;
+  if (outletId === 'washington-post' && (pub.includes('washington post') || pub.includes('wapo'))) return true;
+  if (outletId === 'fox-news' && pub.includes('fox')) return true;
+  if (outletId === 'sky-news' && pub.includes('sky')) return true;
+  if (outletId === 'the-telegraph' && pub.includes('telegraph')) return true;
+  if (outletId === 'scmp' && (pub.includes('south china') || pub.includes('scmp') || pub.includes('china'))) return true;
+  if (outletId === 'cna' && (pub.includes('channel newsasia') || pub.includes('cna'))) return true;
+  if (outletId === 'al-jazeera' && pub.includes('al jazeera')) return true;
+  if (outletId === 'reuters' && pub.includes('reuters')) return true;
+  if (outletId === 'ap-news' && (pub.includes('associated press') || pub.includes('ap news'))) return true;
+  if (outletId === 'wion' && pub.includes('wion')) return true;
+  if (outletId === 'ndtv' && pub.includes('ndtv')) return true;
+  return false;
 }
 
 /**
@@ -215,16 +405,16 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
   const activeOutlets = TRUSTED_OUTLETS_DATA.filter(o => connectedIds.includes(o.id));
 
   return (
-    <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-sm p-4 sm:p-5 space-y-3.5 shadow-2xs">
+    <div className="bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 rounded-sm p-4 sm:p-5 space-y-3.5 shadow-2xs overflow-hidden">
       {/* Top Banner Header */}
       <div className="flex flex-wrap items-center justify-between gap-3 border-b border-stone-200 dark:border-stone-800 pb-3">
-        <div className="flex items-center gap-2">
-          <span className="relative flex h-2.5 w-2.5">
+        <div className="flex items-center gap-2 flex-wrap min-w-0">
+          <span className="relative flex h-2.5 w-2.5 shrink-0">
             <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
             <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
           </span>
-          <span className="font-sans text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100 flex items-center gap-1.5">
-            <Radio className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400" />
+          <span className="font-sans text-xs font-bold uppercase tracking-wider text-stone-900 dark:text-stone-100 flex items-center gap-1.5 shrink-0">
+            <Radio className="w-3.5 h-3.5 text-blue-600 dark:text-blue-400 shrink-0" />
             Connected Newsrooms to Your Newsletter
           </span>
           <span className="text-[11px] text-stone-500 font-sans hidden sm:inline">
@@ -232,7 +422,7 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
           </span>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 shrink-0">
           {selectedOutletFilter && (
             <button
               onClick={() => onSelectOutletFilter(null)}
@@ -248,20 +438,23 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
             className="px-2.5 py-1 rounded text-xs font-semibold bg-stone-100 hover:bg-stone-200 dark:bg-stone-800 dark:hover:bg-stone-700 text-stone-700 dark:text-stone-300 flex items-center gap-1.5 transition-colors cursor-pointer"
             title="Configure which trusted news outlets feed your daily newsletter"
           >
-            <SlidersHorizontal className="w-3.5 h-3.5 text-stone-500" />
+            <SlidersHorizontal className="w-3.5 h-3.5 text-stone-500 shrink-0" />
             <span>Customize Outlets</span>
           </button>
         </div>
       </div>
 
       {/* Description / Mission */}
-      <p className="text-xs text-stone-600 dark:text-stone-300 font-sans leading-relaxed">
+      <p className="text-xs text-stone-600 dark:text-stone-300 font-sans leading-relaxed break-words">
         Your newsletter receives continuous, verified reports from audited newsrooms including{' '}
-        <strong className="text-stone-900 dark:text-stone-100">The Indian Express</strong>,{' '}
-        <strong className="text-stone-900 dark:text-stone-100">BBC News</strong>,{' '}
         <strong className="text-stone-900 dark:text-stone-100">CNN International</strong>,{' '}
-        <strong className="text-stone-900 dark:text-stone-100">Al Jazeera English</strong>,{' '}
-        <strong className="text-stone-900 dark:text-stone-100">The Hindu</strong>, and{' '}
+        <strong className="text-stone-900 dark:text-stone-100">The Indian Express</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">The Hindu</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">Times of India</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">U.S. News & World Report</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">Sky News</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">South China Morning Post</strong>,{' '}
+        <strong className="text-stone-900 dark:text-stone-100">BBC News</strong>, and{' '}
         <strong className="text-stone-900 dark:text-stone-100">Reuters</strong>. Click an outlet below to filter today's briefing:
       </p>
 
@@ -269,13 +462,13 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
       <div className="flex items-center gap-2 overflow-x-auto pb-1 no-scrollbar text-xs font-sans">
         <button
           onClick={() => onSelectOutletFilter(null)}
-          className={`px-3 py-1.5 rounded-sm font-semibold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 ${
+          className={`px-3 py-1.5 rounded-sm font-semibold transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 shrink-0 ${
             selectedOutletFilter === null
               ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-2xs font-bold'
               : 'bg-stone-100 dark:bg-stone-800/80 text-stone-700 dark:text-stone-300 hover:bg-stone-200'
           }`}
         >
-          <Globe2 className="w-3.5 h-3.5" />
+          <Globe2 className="w-3.5 h-3.5 shrink-0" />
           <span>All Connected Outlets ({uniqueArticles.length})</span>
         </button>
 
@@ -287,7 +480,7 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
             <button
               key={outlet.id}
               onClick={() => onSelectOutletFilter(isSelected ? null : outlet.id)}
-              className={`px-3 py-1.5 rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border ${
+              className={`px-3 py-1.5 rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-1.5 border shrink-0 ${
                 isSelected
                   ? 'border-blue-600 bg-blue-50 dark:bg-blue-950 text-blue-900 dark:text-blue-100 font-bold shadow-2xs ring-1 ring-blue-500'
                   : 'border-stone-200 dark:border-stone-800 bg-stone-50/80 dark:bg-stone-950/60 text-stone-700 dark:text-stone-300 hover:border-stone-400'
@@ -307,17 +500,17 @@ export const ConnectedOutletsBar: React.FC<ConnectedOutletsBarProps> = ({
       </div>
 
       {selectedOutletFilter && (
-        <div className="p-2.5 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-between text-xs text-blue-950 dark:text-blue-200 font-sans">
-          <div className="flex items-center gap-2">
+        <div className="p-2.5 rounded bg-blue-50 dark:bg-blue-950/60 border border-blue-200 dark:border-blue-800 flex items-center justify-between text-xs text-blue-950 dark:text-blue-200 font-sans gap-2 flex-wrap">
+          <div className="flex items-center gap-2 min-w-0">
             <CheckCircle2 className="w-4 h-4 text-blue-600 dark:text-blue-400 shrink-0" />
-            <span>
+            <span className="break-words">
               Showing stories reported by{' '}
               <strong>{TRUSTED_OUTLETS_DATA.find(o => o.id === selectedOutletFilter)?.name}</strong> in this edition.
             </span>
           </div>
           <button
             onClick={() => onSelectOutletFilter(null)}
-            className="text-xs font-bold text-blue-700 dark:text-blue-300 underline hover:opacity-80 cursor-pointer"
+            className="text-xs font-bold text-blue-700 dark:text-blue-300 underline hover:opacity-80 cursor-pointer shrink-0"
           >
             Reset to Full Newsletter
           </button>
@@ -356,7 +549,6 @@ export const ConnectedOutletsModal: React.FC<ConnectedOutletsModalProps> = ({
   const toggleOutlet = (id: string) => {
     setConnectedIds(prev => {
       const next = prev.includes(id) ? prev.filter(x => x !== id) : [...prev, id];
-      // Keep at least one
       if (next.length === 0) return prev;
       saveConnectedOutletIds(next);
       setSavedSuccess(true);
@@ -438,7 +630,7 @@ export const ConnectedOutletsModal: React.FC<ConnectedOutletsModalProps> = ({
                   <div className="space-y-1 min-w-0 flex-1">
                     <div className="flex items-center gap-2 flex-wrap">
                       <span className="text-base">{outlet.flag}</span>
-                      <h4 className="font-bold text-sm text-stone-900 dark:text-stone-100">
+                      <h4 className="font-bold text-sm text-stone-900 dark:text-stone-100 break-words">
                         {outlet.name}
                       </h4>
                       <span className="text-[10px] uppercase font-mono px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-600 dark:text-stone-300 font-semibold">
@@ -447,14 +639,14 @@ export const ConnectedOutletsModal: React.FC<ConnectedOutletsModalProps> = ({
                       <span className="text-[11px] text-stone-400">· {outlet.country}</span>
                     </div>
 
-                    <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed">
+                    <p className="text-xs text-stone-600 dark:text-stone-400 leading-relaxed break-words">
                       {outlet.tagline}
                     </p>
 
                     <div className="text-[11px] text-stone-500 pt-1 flex items-center gap-3 flex-wrap">
-                      <span><strong>Ownership:</strong> {outlet.ownership}</span>
+                      <span className="break-words"><strong>Ownership:</strong> {outlet.ownership}</span>
                       <span>·</span>
-                      <span><strong>Funding:</strong> {outlet.funding}</span>
+                      <span className="break-words"><strong>Funding:</strong> {outlet.funding}</span>
                     </div>
                   </div>
 
@@ -481,19 +673,19 @@ export const ConnectedOutletsModal: React.FC<ConnectedOutletsModalProps> = ({
         </div>
 
         {/* Modal Footer */}
-        <div className="px-6 py-3.5 border-t border-stone-200 dark:border-stone-800 bg-stone-100/80 dark:bg-stone-950 flex items-center justify-between font-sans text-xs">
-          <div className="text-stone-500">
+        <div className="px-6 py-3.5 border-t border-stone-200 dark:border-stone-800 bg-stone-100/80 dark:bg-stone-950 flex items-center justify-between font-sans text-xs gap-3">
+          <div className="text-stone-500 min-w-0">
             {savedSuccess ? (
               <span className="text-emerald-600 dark:text-emerald-400 font-semibold flex items-center gap-1">
                 <CheckCircle2 className="w-4 h-4" /> Preferences saved!
               </span>
             ) : (
-              <span>Preferences automatically saved to your browser session.</span>
+              <span className="truncate block">Preferences saved to your browser session.</span>
             )}
           </div>
           <button
             onClick={onClose}
-            className="px-4 py-2 font-bold rounded-sm bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 hover:opacity-90 transition-opacity cursor-pointer"
+            className="px-4 py-2 font-bold rounded-sm bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 hover:opacity-90 transition-opacity cursor-pointer shrink-0"
           >
             Done
           </button>
@@ -517,7 +709,7 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
   onOpenDetail,
   onPlaySection
 }) => {
-  const [activeTab, setActiveTab] = useState<string>('indian-express');
+  const [activeTab, setActiveTab] = useState<string>('cnn');
 
   // Gather all edition articles
   const allArticles: Article[] = [
@@ -535,28 +727,28 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
   const outletArticles = uniqueArticles.filter(a => isArticleFromOutlet(a, currentOutlet.id));
 
   return (
-    <section className="space-y-6">
+    <section className="space-y-6 overflow-hidden">
       <div className="paper-border-double pb-2.5 flex flex-wrap items-center justify-between gap-3">
-        <div className="space-y-0.5">
+        <div className="space-y-0.5 min-w-0">
           <div className="flex items-center gap-2">
-            <Radio className="w-4 h-4 text-red-600 dark:text-red-400" />
-            <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight">
+            <Radio className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0" />
+            <h3 className="font-editorial text-2xl font-black text-stone-950 dark:text-stone-50 uppercase tracking-tight break-words">
               Section I · Connected Newsrooms Wire & Editorial Desks
             </h3>
           </div>
-          <p className="text-xs text-stone-500 font-sans">
-            Directly interconnected reporting from Indian Express, BBC News, CNN, Al Jazeera, The Hindu & Reuters
+          <p className="text-xs text-stone-500 font-sans break-words">
+            Directly interconnected reporting from CNN, Indian Express, The Hindu, Times of India, US News, UK News, SCMP & Reuters
           </p>
         </div>
 
-        <span className="text-xs font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 font-sans">
+        <span className="text-xs font-bold uppercase tracking-widest text-stone-600 dark:text-stone-400 font-sans shrink-0">
           Curated Wire Stream
         </span>
       </div>
 
       {/* Outlet Selector Segmented Bar */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-2 no-scrollbar text-xs font-sans">
-        {TRUSTED_OUTLETS_DATA.slice(0, 6).map(outlet => {
+        {TRUSTED_OUTLETS_DATA.slice(0, 10).map(outlet => {
           const count = uniqueArticles.filter(a => isArticleFromOutlet(a, outlet.id)).length;
           const isActive = activeTab === outlet.id;
 
@@ -564,7 +756,7 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
             <button
               key={outlet.id}
               onClick={() => setActiveTab(outlet.id)}
-              className={`px-3 py-2 rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 font-semibold ${
+              className={`px-3 py-2 rounded-sm transition-all whitespace-nowrap cursor-pointer flex items-center gap-2 font-semibold shrink-0 ${
                 isActive
                   ? 'bg-stone-900 text-white dark:bg-stone-100 dark:text-stone-900 shadow-2xs font-bold'
                   : 'bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 hover:bg-stone-200'
@@ -583,32 +775,32 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
       </div>
 
       {/* Active Desk Dossier & Articles Card */}
-      <div className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-sm p-6 sm:p-8 space-y-6 shadow-2xs">
+      <div className="bg-white dark:bg-stone-900 border border-stone-300 dark:border-stone-800 rounded-sm p-6 sm:p-8 space-y-6 shadow-2xs overflow-hidden">
         {/* Desk Header Profile */}
         <div className="flex flex-wrap items-start justify-between gap-4 border-b border-stone-200 dark:border-stone-800 pb-5">
-          <div className="space-y-1.5">
+          <div className="space-y-1.5 min-w-0 flex-1">
             <div className="flex items-center gap-2 flex-wrap">
               <span className="text-xl">{currentOutlet.flag}</span>
-              <h4 className="font-editorial text-2xl font-bold text-stone-950 dark:text-stone-50">
+              <h4 className="font-editorial text-2xl font-bold text-stone-950 dark:text-stone-50 break-words">
                 {currentOutlet.name} — Connected Wire
               </h4>
-              <span className="text-xs uppercase font-mono px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold">
+              <span className="text-xs uppercase font-mono px-2 py-0.5 rounded bg-stone-100 dark:bg-stone-800 text-stone-700 dark:text-stone-300 font-bold shrink-0">
                 {currentOutlet.type}
               </span>
             </div>
-            <p className="text-xs text-stone-600 dark:text-stone-300 font-sans max-w-2xl leading-relaxed">
+            <p className="text-xs text-stone-600 dark:text-stone-300 font-sans max-w-2xl leading-relaxed break-words">
               {currentOutlet.tagline}
             </p>
             <div className="text-[11px] text-stone-500 font-sans flex items-center gap-3 flex-wrap pt-1">
               <span><strong>Country:</strong> {currentOutlet.country}</span>
               <span>·</span>
-              <span><strong>Ownership:</strong> {currentOutlet.ownership}</span>
+              <span className="break-words"><strong>Ownership:</strong> {currentOutlet.ownership}</span>
               <span>·</span>
-              <span><strong>Funding:</strong> {currentOutlet.funding}</span>
+              <span className="break-words"><strong>Funding:</strong> {currentOutlet.funding}</span>
             </div>
           </div>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 shrink-0">
             {onPlaySection && outletArticles.length > 0 && (
               <button
                 onClick={() => {
@@ -646,27 +838,27 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
               <div
                 key={`outlet-${currentOutlet.id}-${art.id}-${idx}`}
                 onClick={() => onOpenDetail(art)}
-                className="p-5 rounded-sm border border-stone-200 dark:border-stone-800 bg-[#fbf9f5] dark:bg-stone-950/70 hover:border-stone-400 transition-all cursor-pointer space-y-3"
+                className="p-5 rounded-sm border border-stone-200 dark:border-stone-800 bg-[#fbf9f5] dark:bg-stone-950/70 hover:border-stone-400 transition-all cursor-pointer space-y-3 overflow-hidden min-w-0"
               >
-                <div className="flex items-center justify-between text-xs font-sans text-stone-500">
-                  <span className="font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200">
+                <div className="flex items-center justify-between text-xs font-sans text-stone-500 gap-2">
+                  <span className="font-bold uppercase tracking-wider text-stone-800 dark:text-stone-200 truncate">
                     {art.category}
                   </span>
-                  <span className="text-[11px]">
+                  <span className="text-[11px] shrink-0">
                     {getArticleReadingTime(art)}
                   </span>
                 </div>
 
-                <h5 className="font-editorial text-lg font-bold text-stone-950 dark:text-stone-50 leading-snug">
+                <h5 className="font-editorial text-lg font-bold text-stone-950 dark:text-stone-50 leading-snug break-words">
                   {art.headline}
                 </h5>
 
-                <p className="text-xs text-stone-600 dark:text-stone-300 font-sans leading-relaxed line-clamp-3">
+                <p className="text-xs text-stone-600 dark:text-stone-300 font-sans leading-relaxed line-clamp-3 break-words">
                   {art.summary}
                 </p>
 
                 {art.whyItMatters && (
-                  <div className="p-2.5 rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-[11px] text-stone-700 dark:text-stone-300 font-sans">
+                  <div className="p-2.5 rounded bg-white dark:bg-stone-900 border border-stone-200 dark:border-stone-800 text-[11px] text-stone-700 dark:text-stone-300 font-sans break-words">
                     <strong className="text-stone-950 dark:text-stone-100 uppercase tracking-wider block mb-0.5">
                       Why it matters:
                     </strong>
@@ -674,12 +866,12 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
                   </div>
                 )}
 
-                <div className="flex items-center justify-between pt-2 border-t border-stone-200 dark:border-stone-800 text-xs font-sans">
-                  <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold">
+                <div className="flex items-center justify-between pt-2 border-t border-stone-200 dark:border-stone-800 text-xs font-sans gap-2">
+                  <span className="text-[11px] text-emerald-700 dark:text-emerald-400 font-semibold shrink-0">
                     ✓ Verified Report
                   </span>
-                  <span className="text-stone-900 dark:text-stone-100 font-bold hover:underline inline-flex items-center gap-1">
-                    Read Report <ArrowUpRight className="w-3 h-3" />
+                  <span className="text-stone-900 dark:text-stone-100 font-bold hover:underline inline-flex items-center gap-1 truncate">
+                    Read Report <ArrowUpRight className="w-3 h-3 shrink-0" />
                   </span>
                 </div>
               </div>
@@ -687,7 +879,7 @@ export const ConnectedOutletsSpotlight: React.FC<ConnectedOutletsSpotlightProps>
           </div>
         ) : (
           <div className="p-8 text-center bg-stone-50 dark:bg-stone-950/60 rounded-sm text-stone-500 text-sm font-sans space-y-2">
-            <p>
+            <p className="break-words">
               Additional live dispatches from {currentOutlet.name} are currently undergoing the corroboration and verification pipeline.
             </p>
             <p className="text-xs text-stone-400">
