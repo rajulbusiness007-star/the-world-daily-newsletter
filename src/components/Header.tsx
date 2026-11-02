@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Search, Moon, Sun, Bookmark, RefreshCw, Activity, Clock, Bell, Globe, Sparkles } from 'lucide-react';
+import { Search, Moon, Sun, Bookmark, RefreshCw, Activity, Clock, Bell, Globe, Sparkles, Zap } from 'lucide-react';
 import { MainView } from './Navigation.js';
 
 interface HeaderProps {
@@ -79,7 +79,7 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="sticky top-0 z-40 bg-white/95 dark:bg-slate-900/95 backdrop-blur-md border-b border-slate-200/80 dark:border-slate-800 transition-colors">
-      {/* Top Utility Ticker Bar */}
+      {/* Top Utility Ticker Bar with Live Auto-Update Status */}
       <div className="border-b border-slate-100 dark:border-slate-800/80 text-[11px] px-4 sm:px-8 py-1.5 flex flex-wrap items-center justify-between text-slate-500 dark:text-slate-400 gap-2 min-w-0">
         <div className="flex items-center gap-2 tracking-wide font-sans min-w-0 flex-wrap">
           <span className="font-semibold text-slate-700 dark:text-slate-300 flex items-center gap-1.5 shrink-0">
@@ -91,8 +91,14 @@ export const Header: React.FC<HeaderProps> = ({
             Priority: <strong className="text-blue-600 dark:text-blue-400 font-semibold">60% India</strong> / 40% World
           </span>
           <span className="hidden md:inline text-slate-300 dark:text-slate-700" aria-hidden="true">·</span>
-          <span className="hidden md:inline truncate">
-            Daily Automated Briefing: <span className="font-medium text-slate-700 dark:text-slate-300">06:30 AM IST</span>
+          {/* Live Auto-Update Status Pill */}
+          <span 
+            onClick={() => onChangeView('newsletter')}
+            className="inline-flex items-center gap-1.5 shrink-0 text-emerald-700 dark:text-emerald-300 font-semibold bg-emerald-50 dark:bg-emerald-950/50 px-2 py-0.5 rounded-full border border-emerald-200/80 dark:border-emerald-800/60 cursor-pointer hover:bg-emerald-100 transition-colors"
+            title="Automated Daily Publishing Active · 06:30 AM IST"
+          >
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-500 animate-pulse"></span>
+            Daily Auto-Update: 06:30 AM IST (Active)
           </span>
         </div>
 
@@ -119,7 +125,7 @@ export const Header: React.FC<HeaderProps> = ({
             onClick={onManualRefresh}
             disabled={isRefreshing}
             className="flex items-center gap-1 px-2.5 py-1 bg-slate-100 hover:bg-slate-200 dark:bg-slate-800 dark:hover:bg-slate-700 text-slate-700 dark:text-slate-300 rounded-lg font-medium text-[11px] transition-colors disabled:opacity-50 cursor-pointer"
-            title="Ingest fresh feeds and verify stories"
+            title="Check live feeds and verify latest dispatches"
           >
             <RefreshCw className={`w-3 h-3 text-blue-600 dark:text-blue-400 ${isRefreshing ? 'animate-spin' : ''}`} />
             <span className="hidden sm:inline">{isRefreshing ? 'Syncing...' : 'Sync'}</span>
@@ -166,6 +172,8 @@ export const Header: React.FC<HeaderProps> = ({
                 className={`px-2.5 py-1.5 rounded-lg transition-colors whitespace-nowrap relative flex items-center gap-1 cursor-pointer ${
                   isActive
                     ? item.isSpecial
+                      ? 'text-purple-600 dark:text-purple-400 font-bold bg-purple-50/70 dark:bg-purple-950/40'
+                      : 'text-blue-600 dark:text-blue-400 font-bold'
                     : item.isSpecial
                     ? 'text-purple-700 dark:text-purple-400 hover:text-purple-900 dark:hover:text-purple-200'
                     : 'text-slate-600 dark:text-slate-400 hover:text-slate-900 dark:hover:text-slate-200'

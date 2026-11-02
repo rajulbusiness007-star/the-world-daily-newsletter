@@ -11,6 +11,8 @@ import {
   isArticleFromOutlet,
   TRUSTED_OUTLETS_DATA
 } from './ConnectedOutletsManager.js';
+import { AutoUpdateBanner } from './AutoUpdateBanner.js';
+import { AutoUpdateCadence } from '../hooks/useAutoUpdate.js';
 
 interface NewsletterViewProps {
   edition: DailyEdition | null;
@@ -30,6 +32,15 @@ interface NewsletterViewProps {
   onTogglePlayPause?: () => void;
   onOpenNotifications?: () => void;
   isNotificationEnabled?: boolean;
+  // Auto-Update Controls
+  isAutoUpdateEnabled?: boolean;
+  onToggleAutoUpdate?: (enabled: boolean) => void;
+  autoUpdateCadence?: AutoUpdateCadence;
+  onChangeAutoUpdateCadence?: (cadence: AutoUpdateCadence) => void;
+  isCheckingUpdates?: boolean;
+  lastCheckedUpdates?: string;
+  nextUpdateText?: string;
+  onCheckUpdatesNow?: () => void;
 }
 
 export const NewsletterView: React.FC<NewsletterViewProps> = ({
@@ -49,7 +60,15 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
   isPaused = false,
   onTogglePlayPause,
   onOpenNotifications,
-  isNotificationEnabled = false
+  isNotificationEnabled = false,
+  isAutoUpdateEnabled = true,
+  onToggleAutoUpdate,
+  autoUpdateCadence = 'daily',
+  onChangeAutoUpdateCadence,
+  isCheckingUpdates = false,
+  lastCheckedUpdates,
+  nextUpdateText,
+  onCheckUpdatesNow
 }) => {
   const [copied, setCopied] = useState(false);
   const [cachedConfirmed, setCachedConfirmed] = useState(false);
@@ -143,7 +162,7 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
   const displaySectionA = filterByOutlet(edition.sectionA_IndiaTop10);
 
   return (
-    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 space-y-14 pb-20 overflow-hidden">
+    <div className="max-w-5xl mx-auto px-4 sm:px-8 py-8 space-y-10 pb-20 overflow-hidden">
       {/* Top Edition Toolbar */}
       <div className="flex flex-wrap items-center justify-between gap-4 border-b-2 border-stone-900 dark:border-stone-100 pb-5 min-w-0">
         <div className="space-y-1 min-w-0">
@@ -230,6 +249,20 @@ export const NewsletterView: React.FC<NewsletterViewProps> = ({
           </button>
         </div>
       </div>
+
+      {/* AUTONOMOUS DAILY AUTO-UPDATE BANNER & CONTROLS */}
+      <AutoUpdateBanner
+        isEnabled={isAutoUpdateEnabled}
+        onToggleEnabled={onToggleAutoUpdate || (() => {})}
+        cadence={autoUpdateCadence}
+        onChangeCadence={onChangeAutoUpdateCadence || (() => {})}
+        isChecking={isCheckingUpdates}
+        lastChecked={lastCheckedUpdates || new Date().toISOString()}
+        nextUpdateText={nextUpdateText || 'Tomorrow at 06:30 AM IST'}
+        onCheckNow={onCheckUpdatesNow || (() => {})}
+        editionDate={edition.formattedDate}
+        editionNumber={edition.editionNumber}
+      />
 
       {/* CONNECTED TRUSTED OUTLETS RIBBON */}
       <ConnectedOutletsBar

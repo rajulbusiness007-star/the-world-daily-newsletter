@@ -15,6 +15,7 @@ import { ReadingProgressBar } from './components/ReadingProgressBar.js';
 import { AudioPlayerBar } from './components/AudioPlayerBar.js';
 import { useTextToSpeech } from './hooks/useTextToSpeech.js';
 import { useDailyNotifications } from './hooks/useDailyNotifications.js';
+import { useAutoUpdate } from './hooks/useAutoUpdate.js';
 import { Shield, BookOpen, Globe2, ChevronUp, WifiOff, CheckCircle2, RefreshCw } from 'lucide-react';
 
 export default function App() {
@@ -39,6 +40,20 @@ export default function App() {
 
   // Text-To-Speech engine
   const tts = useTextToSpeech();
+
+  // Auto-Update Daily Engine
+  const autoUpdate = useAutoUpdate({
+    currentEditionDate: todayEdition?.formattedDate,
+    onNewEditionFound: (newEdition) => {
+      setTodayEdition(newEdition);
+      if (currentView === 'newsletter') {
+        setActiveEdition(newEdition);
+      }
+    },
+    onRefreshCompleted: () => {
+      loadArticles();
+    }
+  });
 
   // Font sizing: sm, md, lg
   const [fontSize, setFontSize] = useState<'sm' | 'md' | 'lg'>('md');
@@ -76,7 +91,7 @@ export default function App() {
 
   // Helper for static fallback when running in serverless / static hosts like Vercel
   const fetchStaticDb = async () => {
-    const res = await fetch('/data/news_db.json');
+    const res = await fetch(`/data/news_db.json?_t=${Date.now()}`);
     if (!res.ok) throw new Error(`Static DB fetch failed: ${res.status}`);
     return await res.json();
   };
@@ -168,7 +183,7 @@ export default function App() {
   // Fetch today's edition with service worker cache and localStorage fallback
   const loadTodayEdition = async () => {
     try {
-      const res = await fetch('/api/newsletter/today');
+      const res = await fetch(`/api/newsletter/today?_t=${Date.now()}`);
       if (!res.ok) throw new Error(`HTTP error ${res.status}`);
       const data = await res.json();
       if (data && data.formattedDate) {
@@ -482,6 +497,14 @@ export default function App() {
               onTogglePlayPause={tts.togglePlayPause}
               onOpenNotifications={() => setIsNotificationModalOpen(true)}
               isNotificationEnabled={notifications.isEnabled}
+              isAutoUpdateEnabled={autoUpdate.isEnabled}
+              onToggleAutoUpdate={autoUpdate.setEnabled}
+              autoUpdateCadence={autoUpdate.cadence}
+              onChangeAutoUpdateCadence={autoUpdate.setCadence}
+              isCheckingUpdates={autoUpdate.isChecking}
+              lastCheckedUpdates={autoUpdate.lastChecked}
+              nextUpdateText={autoUpdate.nextUpdateText}
+              onCheckUpdatesNow={() => autoUpdate.checkForUpdates(false)}
             />
           )}
 
